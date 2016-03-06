@@ -24,10 +24,15 @@ $(document).ready(function () {
 	}
 	});
 	
-	
-	
-	$('body').on('click', '.incorrect_answer', function () {
-		alert('incorrect');
+	/*Akcja po zaznaczeniu odpowiedzi w zadaniu z jedną poprawną odpowiedzią*/
+	$('body').on('click', '.incorrect_answer', 
+	function () {
+			alert('incorrect');
+		});
+			
+	$('body').on('click', '.correct_answer', 
+		function () {
+			alert('correct');
 		});
 	
 });
