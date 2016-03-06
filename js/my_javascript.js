@@ -3,9 +3,6 @@ $(document).ready(function () {
 	
 	
 	
-	
-	
-	
 	$('body').on('mouseover', '.for_hover', function () {
         $(this).find('.details').slideDown();
 		}).on('mouseleave', '.for_hover', function () {
@@ -22,12 +19,16 @@ $(document).ready(function () {
 	$('body').on('click', '.check_button', function () {
 	if ($('body').find('input.css-checkbox').is(':checked')) {
 		alert('checked');
-		}
-		else{
-			alert('unchecked');
-			}
-
-
+	}else{
+		alert('unchecked');
+	}
 	});
+	
+	
+	
+	$('body').on('click', '.incorrect_answer', function () {
+		alert('incorrect');
+		});
+	
 });
 
