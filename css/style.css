@@ -1,0 +1,166 @@
+@font-face {
+  font-family: apexnew-bold;
+  src: url(../fonts/ApexNew-Bold.otf);
+}
+@font-face {
+  font-family: apexnew-medium;
+  src: url(../fonts/apexnew-medium.otf);
+}
+@font-face {
+  font-family: apexnew-book;
+  src: url(../fonts/apexnew-book.otf);
+}
+@font-face {
+  font-family: apexnew-book-italic;
+  src: url(../fonts/apexnew-bookitalic.otf);
+}
+@font-face {
+  font-family: apexnew-light;
+  src: url(../fonts/apexnew-light.otf);
+}
+@font-face {
+  font-family: apexnew-light-italic;
+  src: url(../fonts/apexnew-lightitalic.otf);
+}
+/*
+/**************
+/**
+/** FONTS SIZES
+/**
+/**************
+*/
+.rozmiar12 {
+  font-size: 12px;
+}
+.rozmiar14 {
+  font-size: 14px;
+}
+.rozmiar16 {
+  font-size: 16px;
+}
+.rozmiar18 {
+  font-size: 18px;
+}
+.rozmiar20 {
+  font-size: 20px;
+}
+.rozmiar22 {
+  font-size: 22px;
+}
+.rozmiar24 {
+  font-size: 24px;
+}
+.rozmiar30 {
+  font-size: 30px;
+}
+.rozmiar36 {
+  font-size: 36px;
+}
+.rozmiar48 {
+  font-size: 48px;
+}
+.rozmiar58 {
+  font-size: 58px;
+}
+.rozmiar72 {
+  font-size: 72px;
+}
+/*
+/**************
+/**
+/** FONTS
+/**
+/**************
+*/
+.apexnew-book {
+	font-family: "apexnew-book";
+}
+.apexnew-medium {
+	font-family: "apexnew-medium";
+}
+.apexnew-bookitalic {
+	font-family: "apexnew-book-italic";
+}
+.apexnew-light {
+	font-family: "apexnew-light";
+}
+.apexnew-bold {
+	font-family: "apexnew-bold";
+}
+.apexnew-light-italic {
+	font-family: "apexnew-light-italic";
+}
+.no_padding{
+	padding: 0px 0px 0px 0px !important;
+}
+.wysun{
+	display:none;
+}
+.margin-top-30{
+	margin-top:30px;
+}
+.border-radius-5{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.element_menu{
+	border:3px solid #55AA55;
+}
+.details{
+	margin-top:-4px;
+	padding-bottom:300px;
+	height:100px;
+	border:3px solid #55AA55;
+	display:none;
+}
+.for_hover{
+	-webkit-transition: all 500ms ease;
+	-moz-transition: all 500ms ease;
+	-ms-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	transition: all 500ms ease;
+}
+.for_hover:hover{
+	transform:scale(1.1);
+}
+ul{
+	margin-left: 0 !important;
+}
+ul li{
+	margin-left: 0 !important;
+}
+.all_questions{
+	margin-top:50px;
+}
+.button{
+	border:0px solid black;
+	background-color:green;
+	color:white;
+	padding:5px 5px 5px 5px !important;
+		-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+@media (max-width: 767px) {
+  .margin-for-xs {
+    margin-top:20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
