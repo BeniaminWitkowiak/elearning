@@ -24,7 +24,7 @@
 		<script>
 		$(document).ready(function () {
 		var numberOfCorrectAnswers = 3;
-			$('body').on('click', '.check_button', function () {
+			$('body').on('click', '.multiple_choice_check_button', function () {
 		
 		if ($('body').find('input.checkbox_true').is(':checked')) {//zaznaczylem min jedna dobra odpowiedz
 			if ($('body').find('input.checkbox_false').is(':checked')) {//zaznaczylem dobra odpowiedz i jakas ze zlych odpowiedzi
@@ -37,6 +37,8 @@
 				if(ile_zaznaczonych == numberOfCorrectAnswers){
 					alert("Dobrze! Zaznaczyles wszystkie poprawne odpowiedzi!");//zaznaczylem dobra odpowiedz i NIE ZAZNACZYLEM zlej odpowiedzi
 					$('.next_button').css("display", "block");
+					$('.grey_background').css("display", "block");
+					$('.incorrect_message').css("display", "block");
 					}else{
 					alert("Zaznaczyles dobra odpowiedz, ale to nie jedyna.")
 					}
@@ -66,6 +68,16 @@
 	
 	
 	<body>
+		
+				<div class="grey_background">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);">YOUR ANSWER IS INCORRECT !!</span>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);">YOUR ANSWER IS CORRECT !!</span>
+			</div>
+		</div>
+		
 		
 			<div id="left_menu" class="col-xs-2">
 				<h2>Menu</h2>
@@ -134,7 +146,7 @@
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 margin-for-xs" style="border:0px solid blue">
-					<a href="#"><div class="button check_button text-center apexnew-medium">Check</div></a>
+					<a href="#"><div class="button multiple_choice_check_button text-center apexnew-medium">Check</div></a>
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 margin-for-xs" style="border:0px solid blue">
