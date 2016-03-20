@@ -110,8 +110,8 @@
 }
 .details{
 	margin-top:-4px;
-	padding-bottom:300px;
-	height:100px;
+	/*padding-bottom:300px;*/
+	/*height:100px;*/
 	border:3px solid #55AA55;
 	display:none;
 }
