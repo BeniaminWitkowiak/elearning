@@ -21,6 +21,39 @@
 		<script type="text/javascript" async
 		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
 		</script>
+		<script>
+		$(document).ready(function () {
+		var numberOfCorrectAnswers = 3;
+			$('body').on('click', '.check_button', function () {
+		
+		if ($('body').find('input.checkbox_true').is(':checked')) {//zaznaczylem min jedna dobra odpowiedz
+			if ($('body').find('input.checkbox_false').is(':checked')) {//zaznaczylem dobra odpowiedz i jakas ze zlych odpowiedzi
+				alert("Jesteś blisko- zaznaczono dobrą i złą odpowiedź.");
+			}else{
+				//ZAZNACZONE SA TYLKO POPRAWNE ODPOWIEDZI, ALE TRZEBA SPR CZY WSZYSTKIE
+				var ile_zaznaczonych = $('body').find('input.checkbox_true:checked').length;
+				//alert("zaznaczonych dobrych jest: " + ile_zaznaczonych);
+				//alert("wszystkich dobrych jest" + numberOfCorrectAnswers);
+				if(ile_zaznaczonych == numberOfCorrectAnswers){
+					alert("Dobrze! Zaznaczyles wszystkie poprawne odpowiedzi!");//zaznaczylem dobra odpowiedz i NIE ZAZNACZYLEM zlej odpowiedzi
+					$('.next_button').css("display", "block");
+					}else{
+					alert("Zaznaczyles dobra odpowiedz, ale to nie jedyna.")
+					}
+			}
+		}else{
+			alert("Niestety, odpowiedź jest błędna.");//zaznaczylem zla odpowiedz
+		}
+	
+	});
+			
+			
+			});
+				
+		</script>
+		
+		
+		
 		
 		<!-- FAVICON -->
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -64,14 +97,14 @@
 					</p>
 				</div>
 				<div class="col-xs-12 black_font apexnew-light rozmiar14 no_padding text-left" style="margin-top:10px; border:0px solid black">
-					<input type="checkbox" name="checkboxG12" id="checkboxG12" class="css-checkbox checkbox_false" />
+					<input type="checkbox" name="checkboxG12" id="checkboxG12" class="css-checkbox checkbox_true" />
 					<label for="checkboxG12" class="css-label"></label>
 					<p class="black_font text-left" style="padding-left:25px; margin-top:-23px">
 						11 stopni
 					</p>
 				</div>
 				<div class="col-xs-12 black_font apexnew-light rozmiar14 no_padding text-left" style="margin-top:10px; border:0px solid black">
-					<input type="checkbox" name="checkboxG13" id="checkboxG13" class="css-checkbox checkbox_false" />
+					<input type="checkbox" name="checkboxG13" id="checkboxG13" class="css-checkbox checkbox_true" />
 					<label for="checkboxG13" class="css-label"></label>
 					<p class="black_font text-left" style="padding-left:25px; margin-top:-23px">
 						60 stopni

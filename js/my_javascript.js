@@ -18,20 +18,7 @@ $(document).ready(function () {
 	});
 	
 	*/
-	$('body').on('click', '.check_button', function () {
-	
-		if ($('body').find('input.checkbox_true').is(':checked')) {//zaznaczylem dobra odpowiedz
-			if ($('body').find('input.checkbox_false').is(':checked')) {//zaznaczylem dobra odpowiedz i jakas ze zlych odpowiedzi
-				alert("Jesteś blisko- zaznaczono dobrą i złą odpowiedź.");
-			}else{
-				alert("Dobrze!");//zaznaczylem dobra odpowiedz i NIE ZAZNACZYLEM zlej odpowiedzi
-				$('.next_button').css("display", "block");
-			}
-		}else{
-			alert("Niestety, odpowiedź jest błędna.");//zaznaczylem zla odpowiedz
-		}
-	
-	});
+
 	
 	/*Akcja po zaznaczeniu odpowiedzi w zadaniu z jedną poprawną odpowiedzią*/
 	$('body').on('click', '.incorrect_answer', 
