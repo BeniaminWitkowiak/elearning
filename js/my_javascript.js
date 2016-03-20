@@ -10,7 +10,7 @@ $(document).ready(function () {
 	
 	$('body').on('mouseover', '.hint', function () {
         $(this).find('.details').slideDown();
-		}).on('mouseleave', '.for_hover', function () {
+		}).on('mouseleave', '.hint', function () {
         $(this).find('.details').slideUp();
 	});
 	/*
