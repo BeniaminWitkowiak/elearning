@@ -144,6 +144,9 @@ ul li{
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 }
+.next_button{
+	display:none;
+}
 a:hover{
 	text-decoration:none !important;
 }

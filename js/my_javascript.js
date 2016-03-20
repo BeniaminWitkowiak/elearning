@@ -10,18 +10,27 @@ $(document).ready(function () {
 	});
 	/*
 		$('body').on('click', '.check_button', function () {
-		if ($(this).closest('body').find('checkboxG11').is(':checked')) {
-		alert("CHECKED !!!!")
-		} else {
-		alert('Unchecked');
-		}
-	});*/
-	$('body').on('click', '.check_button', function () {
 		if ($('body').find('input.css-checkbox').is(':checked')) {
 			alert('checked');
 			}else{
 			alert('unchecked');
 		}
+	});
+	
+	*/
+	$('body').on('click', '.check_button', function () {
+	
+		if ($('body').find('input.checkbox_true').is(':checked')) {//zaznaczylem dobra odpowiedz
+			if ($('body').find('input.checkbox_false').is(':checked')) {//zaznaczylem dobra odpowiedz i jakas ze zlych odpowiedzi
+				alert("Jesteś blisko- zaznaczono dobrą i złą odpowiedź.");
+			}else{
+				alert("Dobrze!");//zaznaczylem dobra odpowiedz i NIE ZAZNACZYLEM zlej odpowiedzi
+				$('.next_button').css("display", "block");
+			}
+		}else{
+			alert("Niestety, odpowiedź jest błędna.");//zaznaczylem zla odpowiedz
+		}
+	
 	});
 	
 	/*Akcja po zaznaczeniu odpowiedzi w zadaniu z jedną poprawną odpowiedzią*/
