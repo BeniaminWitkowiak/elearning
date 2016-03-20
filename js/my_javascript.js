@@ -1,9 +1,14 @@
 $(document).ready(function () {
 	$('body').find('.wysun').slideDown();
 	
-	
-	
+	/*Wyświetla po najechaniu myszką na diva z klasą for_hover, wyjeżdża div z klasą details*/
 	$('body').on('mouseover', '.for_hover', function () {
+        $(this).find('.details').slideDown();
+		}).on('mouseleave', '.for_hover', function () {
+        $(this).find('.details').slideUp();
+	});
+	
+	$('body').on('mouseover', '.hint', function () {
         $(this).find('.details').slideDown();
 		}).on('mouseleave', '.for_hover', function () {
         $(this).find('.details').slideUp();
