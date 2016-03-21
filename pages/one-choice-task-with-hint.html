@@ -14,8 +14,8 @@
 		
 		<!-- SCRIPTS -->
 		<script src="../js/jquery-1.11.3.js"></script>
-		<script src="../js/my_javascript.js"></script>	
-		<script src="../js/angular.js"></script>
+		<script src="../js/my_javascript.js"></script>
+		<script src="../js/angular.js"></script>	
 		<script type="../text/x-mathjax-config">
 			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 		</script>
@@ -34,6 +34,7 @@
 	
 	
 	<body ng-app="">
+	
 			<!--MENU-->
 		<div class="col-xs-2">
 			<div ng-include="'menu.html'"></div>
@@ -59,6 +60,12 @@
 						<input type="radio" name="optradio" class="incorrect_answer">Option 3
 					</label>
 				</form>
+				<div class="hint" style="display:inline-block;">
+					<h3>PODPOWIEDŹ</h3>
+					<div class="details">
+						<p>Tresć podpowiedzi</p>
+					</div>
+				</div>
 			</div>
 			
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
