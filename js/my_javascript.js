@@ -53,6 +53,8 @@ $(document).ready(function () {
 		$(this).slideUp();
 		$('.correct_message').css("display", "none");
 		$('.incorrect_message').css("display", "none");
+		$('.almost_correct_message').css("display", "none");
+		$('.correct_and_incorrect_message').css("display", "none");
 	});
 	
 });

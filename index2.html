@@ -28,19 +28,21 @@
 		
 		if ($('body').find('input.checkbox_true').is(':checked')) {//zaznaczylem min jedna dobra odpowiedz
 			if ($('body').find('input.checkbox_false').is(':checked')) {//zaznaczylem dobra odpowiedz i jakas ze zlych odpowiedzi
-				alert("Jesteś blisko- zaznaczono dobrą i złą odpowiedź.");
+				//alert("Jesteś blisko- zaznaczono dobrą i złą odpowiedź.");
+				$('.grey_background').css("display", "block");
+				$('.correct_and_incorrect_message').css("display", "block");
 			}else{
 				//ZAZNACZONE SA TYLKO POPRAWNE ODPOWIEDZI, ALE TRZEBA SPR CZY WSZYSTKIE
 				var ile_zaznaczonych = $('body').find('input.checkbox_true:checked').length;
-				//alert("zaznaczonych dobrych jest: " + ile_zaznaczonych);
-				//alert("wszystkich dobrych jest" + numberOfCorrectAnswers);
 				if(ile_zaznaczonych == numberOfCorrectAnswers){
 					//zaznaczylem wszystkie dobre odpowiedzi i NIE ZAZNACZYLEM zadnej zlej
 					$('.next_button').css("display", "block");
 					$('.grey_background').css("display", "block");
 					$('.correct_message').css("display", "block");
 					}else{
-					alert("Zaznaczyles dobra odpowiedz, ale to nie jedyna.");
+						//Zaznaczyles dobra odpowiedz, ale to nie jedyna.
+						$('.grey_background').css("display", "block");
+						$('.almost_correct_message').css("display", "block");
 					}
 			}
 		}else{
@@ -73,10 +75,18 @@
 		
 				<div class="grey_background">
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message" style="position:relative">
-				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">YOUR ANSWER IS INCORRECT !!</span>
+				<span class="span_message" >YOUR ANSWER IS INCORRECT !!</span>
 			</div>
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message" style="position:relative">
-				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">YOUR ANSWER IS CORRECT !!</span>
+				<span class="span_message">YOUR ANSWER IS CORRECT !!</span>
+			</div>
+			
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 almost_correct_message" style="position:relative">
+				<span class="span_message">There are more correct answers !!</span>
+			</div>
+			
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_and_incorrect_message" style="position:relative">
+				<span class="span_message">There are correct and incorrect answers checked !!</span>
 			</div>
 		</div>
 		

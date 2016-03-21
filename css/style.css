@@ -175,7 +175,8 @@ a:hover{
 }
 .incorrect_message{
 	display:none;
-	height:30vh;
+		padding-top:30px;
+	padding-bottom:30px;
 	background-color:#FFAAAA;
 	margin-top:10%;
 	margin:5px solid white;
@@ -183,9 +184,32 @@ a:hover{
 .correct_message{
 	display:none;
 	background-color:#88CC88;
-	height:30vh;
+		padding-top:30px;
+	padding-bottom:30px;
 	margin-top:10%;
 	margin:5px solid white;
+}
+.almost_correct_message{
+	display:none;
+	background-color:#FFFFAA;
+		padding-top:30px;
+	padding-bottom:30px;
+	margin-top:10%;
+	margin:5px solid white;
+}
+.correct_and_incorrect_message{
+	display:none;
+	background-color:#6C939F;
+	padding-top:30px;
+	padding-bottom:30px;
+	margin-top:10%;
+	margin:5px solid white;
+}
+.span_message{
+	/*position:absolute; 
+	top:50%; 
+	transform:translateY(-50%);
+	left:22%;*/
 }
 
 
