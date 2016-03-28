@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Tworzenie materiałóww e-learningowych
+		</title>
+		
+		<meta charset="utf-8">	
+		
+		<!-- STYLES -->	
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/style_checkbox_green.css" rel="stylesheet">
+		
+		<!-- SCRIPTS -->
+		<script src="../js/jquery-1.11.3.js"></script>
+		<script src="../js/my_javascript.js"></script>
+		<script src="../js/angular.js"></script>	
+		<script type="../text/x-mathjax-config">
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="../text/javascript" async
+		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+		</script>
+		
+		<!-- FAVICON -->
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="favicon.ico">
+		
+		
+	</head>
+	
+	
+	
+	<body ng-app="">
+	
+			<!--MENU-->
+		<div class="col-xs-2">
+			<div ng-include="'menu.html'"></div>
+		</div>
+		<div class="col-xs-8 col-xs-offset-1">
+			<div class="container margin-top-30 bg-info col-xs-12">
+				<div class="text-center">
+					<span class="apexnew-medium rozmiar36">Tworzenie materiałów e-learningowych</span>
+				</div>
+			</div>
+			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
+				<h2>Zadanie 1</h2>
+				<p>Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania </p>
+				<p>Wybierz prawidłową odpowiedź.</p>
+				<form role="form">
+					<label class="radio-inline">
+						<input type="radio" name="optradio" class="incorrect_answer">Option 1
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optradio" class="correct_answer">Option 2
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optradio" class="incorrect_answer">Option 3
+					</label>
+				</form>
+				
+				<div style="display:inline-block;">
+					<h3>PODPOWIEDŹ 1 <input type="checkbox" ng-model="hint1"></h3>
+					<div ng-hide="!hint1">
+						<p>Tresć podpowiedzi</p>
+						<span>Dalsza podpowiedź  <input type="checkbox" ng-model="hint2"></span>
+						<div ng-hide="!hint2">
+							<p>Tresć podpowiedzi 2</p>
+					</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
+				<div class="col-xs-12 col-sm-6" style="border:0px solid blue">
+					<a href="#"><div class="button text-center apexnew-medium">Back</div></a>
+				</div>
+				
+				<div class="col-xs-12 col-sm-6 margin-for-xs" style="border:0px solid blue">
+					<a href="#"><div class="button check_button text-center apexnew-medium">Check</div></a>
+				</div>	
+			</div>
+			
+			<div class="col-xs-12 black_font apexnew-light rozmiar14 text-left" style="margin-top:15px; padding-left:24px">
+				<!-- *pola obowiązkowe-->
+			</div>
+			
+		</div>
+		
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script src='../js/bootstrap.min.js'></script>	
+	</body>
+	
+</html>
