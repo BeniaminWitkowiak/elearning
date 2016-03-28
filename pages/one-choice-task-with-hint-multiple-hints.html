@@ -16,12 +16,9 @@
 		<script src="../js/jquery-1.11.3.js"></script>
 		<script src="../js/my_javascript.js"></script>
 		<script src="../js/angular.js"></script>	
-		<script type="../text/x-mathjax-config">
-			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-		</script>
-		<script type="../text/javascript" async
-		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
-		</script>
+        <script type="text/javascript" async
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
 		
 		<!-- FAVICON -->
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -33,13 +30,23 @@
 	
 	
 	
-	<body ng-app="">
+	<body ng-app="app" ng-controller="task">
 	
 			<!--MENU-->
 		<div class="col-xs-2">
 			<div ng-include="'menu.html'"></div>
 		</div>
-		<div class="col-xs-8 col-xs-offset-1">
+
+        <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
+        <div class="grey_background">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message " style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">POPRAWNA ODPOWIEDZ</span>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">BŁĘDNA ODPOWIEDZ</span>
+			</div>
+		</div>
+		<div class="col-xs-8 col-xs-offset-1" >
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
 					<span class="apexnew-medium rozmiar36">Tworzenie materiałów e-learningowych</span>
@@ -47,39 +54,43 @@
 			</div>
 			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
 				<h2>Zadanie 1</h2>
-				<p>Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania Treść zadania </p>
-				<p>Wybierz prawidłową odpowiedź.</p>
-				<form role="form">
-					<label class="radio-inline">
-						<input type="radio" name="optradio" class="incorrect_answer">Option 1
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="optradio" class="correct_answer">Option 2
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="optradio" class="incorrect_answer">Option 3
-					</label>
-				</form>
+				<p>Pierwiastkiem równania `x^2 - 2x + 4 = 0` jest</p>
+                <div>
+				    <form role="form">
+					    <label class="radio-inline">
+						    <input type="radio" name="optradio" ng-model="task_opt" value="true" required>Poprawna
+					    </label>
+					    <label class="radio-inline">
+						    <input type="radio" name="optradio" ng-model="task_opt" value="false" required>Zła
+					    </label>
+					    <label class="radio-inline">
+						    <input type="radio" name="optradio" ng-model="task_opt" value="false" required>Zła
+					    </label>
+				    </form>
+                </div>
 				
+                <!--Podpowiedzi do zadania-->
 				<div style="display:inline-block;">
 					<h3>PODPOWIEDŹ 1 <input type="checkbox" ng-model="hint1"></h3>
 					<div ng-hide="!hint1">
-						<p>Tresć podpowiedzi</p>
-						<span>Dalsza podpowiedź  <input type="checkbox" ng-model="hint2"></span>
+						<p>`\Delta = b^2 - 4ac`</p>
+                        <span>Dalsza podpowiedź  <input type="checkbox" ng-model="hint2"></span>
 						<div ng-hide="!hint2">
-							<p>Tresć podpowiedzi 2</p>
-					</div>
+							<p>
+						<p>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$</p></p>
+					    </div>
 					</div>
 				</div>
 			</div>
+			</div>
 			
-			<div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
+			<div class="col-xs-12 col-sm-8" style="border:0px solid red; margin-top:80px;">
 				<div class="col-xs-12 col-sm-6" style="border:0px solid blue">
 					<a href="#"><div class="button text-center apexnew-medium">Back</div></a>
 				</div>
 				
 				<div class="col-xs-12 col-sm-6 margin-for-xs" style="border:0px solid blue">
-					<a href="#"><div class="button check_button text-center apexnew-medium">Check</div></a>
+					<a ng-click="check()"><div class="button check_button text-center apexnew-medium">Check</div></a>
 				</div>	
 			</div>
 			
@@ -90,7 +101,22 @@
 		</div>
 		
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-		<script src='../js/bootstrap.min.js'></script>	
+		<script src='../js/bootstrap.min.js'></script>
+        <script>
+            var app = angular.module('app', []);
+            app.controller('task', function ($scope) {
+                $scope.check = function () {
+                    if ($scope.task_opt === "true") {							
+                        $('.next_button').css("display", "block");
+					    $('.grey_background').css("display", "block");
+					    $('.correct_message').css("display", "block");
+                    } else {
+					    $('.grey_background').css("display", "block");
+					    $('.incorrect_message').css("display", "block");
+                    }
+                };
+            });
+        </script>
 	</body>
 	
 </html>
