@@ -24,7 +24,6 @@ $(document).ready(function () {
 	
 	*/
 
-	
 	/*Akcja po zaznaczeniu odpowiedzi w zadaniu z jedną poprawną odpowiedzią*/
 	$('body').on('click', '.incorrect_answer', 
 	function () {
@@ -35,10 +34,7 @@ $(document).ready(function () {
 	function () {
 		alert('correct');
 	});
-	
-	
-	
-	
+		
 	$('body').on('click', '.true', function () {
 		$('.grey_background').css("display", "block");
 		$('.incorrect_message').css("display", "block");
@@ -48,11 +44,13 @@ $(document).ready(function () {
 		$('.correct_message').css("display", "block");
 	});
 	
-	
+	//po odkliknięciu w tło resetuje wszystkie elementy
 	$('body').on('click', '.grey_background', function () {
 		$(this).slideUp();
 		$('.correct_message').css("display", "none");
 		$('.incorrect_message').css("display", "none");
+		$('.some_right_message').css("display", "none");
+		$('.wrong_and_right_message').css("display", "none");
 	});
 	
 });

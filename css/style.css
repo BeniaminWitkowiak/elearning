@@ -180,9 +180,26 @@ a:hover{
 	margin-top:10%;
 	margin:5px solid white;
 }
+
 .correct_message{
 	display:none;
 	background-color:#88CC88;
+	height:30vh;
+	margin-top:10%;
+	margin:5px solid white;
+}
+
+.some_right_message {
+	display:none;
+	background-color:#d1db72;
+	height:30vh;
+	margin-top:10%;
+	margin:5px solid white;
+}
+
+.wrong_and_right_message{
+	display:none;
+	background-color:#FFAAAA;
 	height:30vh;
 	margin-top:10%;
 	margin:5px solid white;
