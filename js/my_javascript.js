@@ -1,3 +1,12 @@
+    function toggleVideo(state) {
+        // if state == 'hide', hide. Else: show video
+        var div = document.getElementById("popupVid");
+        var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+        div.style.display = state == 'hide' ? 'none' : '';
+        func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+        iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+    }
+
 $(document).ready(function () {
 	$('body').find('.wysun').slideDown();
 	
@@ -57,6 +66,38 @@ $(document).ready(function () {
 		$('.wrong_and_right_message').css("display", "none");
 
 	});
+	
+	
+	
+
+   /*///////////*/
+    /* PIERWSZE POP-UP VIDEO */
+    $('body').on('click', '.menu_click', function () {
+        $(this).closest('body').find('.wyszarzanie_strony').css("display", "block");
+        $(this).closest('body').find('.popup').slideToggle();
+        // $(this).closest('body').find('.popupy').addClass('.popup');
+
+    });
+
+    $('body').on('click', '.wyszarzanie_strony', function () {
+        $(this).closest('body').find('.popup').slideUp();
+       $(this).closest('body').find('.wyszarzanie_strony').css("display", "none");
+
+        $(this).closest('body').find('.popup').slideUp("normal", function () {
+            toggleVideo('hide');
+        });
+
+
+        //$(this).closest('body').find('.popup').slideUp("normal", function() { $(this).remove(); } );
+
+    });
+
+	
+
+
+	
+	
+	
 	
 });
 

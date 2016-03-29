@@ -228,8 +228,30 @@ a:hover{
 	margin-top:10%;
 	margin:5px solid white;
 }
-
-
+.popup {
+  box-shadow: 0 0 50px #888888;
+  z-index: 9999;
+  display: none;
+  background-color: white;
+  position: fixed !important;
+  left: 25%;
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: 0;
+  width: 50%;
+  height: 50vh;
+}
+.wyszarzanie_strony {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 998;
+}
 
 
 
