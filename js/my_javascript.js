@@ -10,7 +10,7 @@ $(document).ready(function () {
 	
 	$('body').on('mouseover', '.hint', function () {
         $(this).find('.details').slideDown();
-		}).on('mouseleave', '.for_hover', function () {
+		}).on('mouseleave', '.hint', function () {
         $(this).find('.details').slideUp();
 	});
 	/*
@@ -24,7 +24,6 @@ $(document).ready(function () {
 	
 	*/
 
-	
 	/*Akcja po zaznaczeniu odpowiedzi w zadaniu z jedną poprawną odpowiedzią*/
 	$('body').on('click', '.incorrect_answer', 
 	function () {
@@ -35,10 +34,7 @@ $(document).ready(function () {
 	function () {
 		alert('correct');
 	});
-	
-	
-	
-	
+		
 	$('body').on('click', '.true', function () {
 		$('.grey_background').css("display", "block");
 		$('.incorrect_message').css("display", "block");
@@ -48,13 +44,18 @@ $(document).ready(function () {
 		$('.correct_message').css("display", "block");
 	});
 	
-	
+	//po odkliknięciu w tło resetuje wszystkie elementy
 	$('body').on('click', '.grey_background', function () {
 		$(this).slideUp();
 		$('.correct_message').css("display", "none");
 		$('.incorrect_message').css("display", "none");
+<<<<<<< HEAD
 		$('.almost_correct_message').css("display", "none");
 		$('.correct_and_incorrect_message').css("display", "none");
+=======
+		$('.some_right_message').css("display", "none");
+		$('.wrong_and_right_message').css("display", "none");
+>>>>>>> f879927e66dc4c91f05556cb42f26ee12a9fd93c
 	});
 	
 });

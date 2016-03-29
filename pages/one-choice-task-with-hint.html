@@ -39,11 +39,11 @@
 
         <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
         <div class="grey_background">
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message" style="position:relative">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message " style="position:relative">
 				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">POPRAWNA ODPOWIEDZ</span>
 			</div>
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message" style="position:relative">
-				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">NIEPOPRAWNA ODPOWIEDZ</span>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">BŁĘDNA ODPOWIEDZ</span>
 			</div>
 		</div>
 		<div class="col-xs-8 col-xs-offset-1" >
@@ -58,16 +58,26 @@
                 <div>
 				    <form role="form">
 					    <label class="radio-inline">
-						    <input type="radio" name="optradio" ng-model="task_opt" value="true" required>Poprawna
+						    <input type="radio" name="optradio" ng-model="task_opt" value="true">Poprawna
 					    </label>
 					    <label class="radio-inline">
-						    <input type="radio" name="optradio" ng-model="task_opt" value="false" required>Zła
+						    <input type="radio" name="optradio" ng-model="task_opt" value="false">Zła
 					    </label>
 					    <label class="radio-inline">
-						    <input type="radio" name="optradio" ng-model="task_opt" value="false" required>Zła
+						    <input type="radio" name="optradio" ng-model="task_opt" value="false">Zła
 					    </label>
 				    </form>
                 </div>
+				
+                <!--Podpowiedzi do zadania-->
+				<div style="display:inline-block;">
+					<h3>PODPOWIEDŹ 1 <input type="checkbox" ng-model="hint1"></h3>
+					<div ng-hide="!hint1">
+						<p>`\Delta = b^2 - 4ac`</p>
+					</div>
+				</div>
+			</div>
+			
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
 				<div class="col-xs-12 col-sm-6" style="border:0px solid blue">
 					<a href="#"><div class="button text-center apexnew-medium">Back</div></a>
