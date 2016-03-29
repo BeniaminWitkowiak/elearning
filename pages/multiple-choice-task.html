@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Tworzenie materiałóww e-learningowych
+		</title>
+		
+		<meta charset="utf-8">	
+		
+		<!-- STYLES -->	
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/style_checkbox_green.css" rel="stylesheet">
+		
+		<!-- SCRIPTS -->
+		<script src="../js/jquery-1.11.3.js"></script>
+		<script src="../js/my_javascript.js"></script>
+		<script src="../js/angular.js"></script>	
+        <script type="text/javascript" async
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+		
+		<!-- FAVICON -->
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="favicon.ico">
+		
+		
+	</head>
+	
+	<body ng-app="app" ng-controller="task">
+	
+			<!--MENU-->
+		<div class="col-xs-2">
+			<div ng-include="'menu.html'"></div>
+		</div>
+
+        <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
+        <div class="grey_background">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">POPRAWNA ODPOWIEDZ</span>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 some_right_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">NIE ZAZNACZONO WSZYSTKICH POPRAWNYCH ODPOWIEDZI</span>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">BŁĘDNA ODPOWIEDZ</span>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 wrong_and_right_message" style="position:relative">
+				<span style="position:absolute; top:50%; transform:translateY(-50%);left:21%;">ZAZNACZONO DOBRE I BŁĘDNE ODPOWIEDZI</span>
+			</div>
+		</div>
+		<div class="col-xs-8 col-xs-offset-1" >
+			<div class="container margin-top-30 bg-info col-xs-12">
+				<div class="text-center">
+					<span class="apexnew-medium rozmiar36">Tworzenie materiałów e-learningowych</span>
+				</div>
+			</div>
+			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
+				<h2>Zadanie 1</h2>
+				<p>Pierwiastkiem równania `x^2 - 2x + 4 = 0` jest</p>
+                <div>
+				    <form role="form">
+					    <label class="radio-inline">
+						    <input type="checkbox" ng-model="right1">Poprawna1
+					    </label>
+					    <label class="radio-inline">
+						    <input type="checkbox" ng-model="wrong1">Zła
+					    </label>
+					    <label class="radio-inline">
+						    <input type="checkbox" ng-model="wrong2">Zła
+					    </label>
+					    <label class="radio-inline">
+						    <input type="checkbox" ng-model="right2">Poprawna2
+					    </label>
+					    <label class="radio-inline">
+						    <input type="checkbox" ng-model="right3">Poprawna3
+					    </label>
+				    </form>
+                </div>
+			    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
+				    <div class="col-xs-12 col-sm-6" style="border:0px solid blue">
+					    <a href="#"><div class="button text-center apexnew-medium">Back</div></a>
+				    </div>
+				
+				    <div class="col-xs-12 col-sm-6 margin-for-xs" style="border:0px solid blue">
+					    <a ng-click="check()"><div class="button check_button text-center apexnew-medium">Check</div></a>
+				    </div>	
+			    </div>
+		
+			
+		    </div>
+		</div>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script src='../js/bootstrap.min.js'></script>
+        <script>
+            var app = angular.module('app', []);
+            app.controller('task', function ($scope) {
+                $scope.check = function () {                    
+                    //Ustawiamy odpowiednio zmienne, wstawiając w odpowiednie miejsca wszystkie dobre / złe odopwiedzi
+                    var allRightCheck = $scope.right1 && $scope.right2  && $scope.right3;
+                    var someRightCheck = $scope.right1 || $scope.right2  || $scope.right3;
+                    var someWrongCheck = $scope.wrong1 || $scope.wrong2;
+
+                    //wyświetlanie wiadomości po wciśnięciu check
+                    //same dobre i nie ma żadnej złej
+                    if (allRightCheck && !someWrongCheck) {
+                        $('.correct_message').css("display", "block");
+                        //alert("Wszystkie ok");
+                    } else if (someRightCheck && someWrongCheck) {
+                        // są zaznaczone złe i dobre
+                        $('.wrong_and_right_message').css("display", "block");
+                        //alert("ZŁE I DOBRE");
+                    } else if (someRightCheck && !someWrongCheck && !allRightCheck) {
+                        // nie wszystkie dobre są zaznaczone
+                        $('.some_right_message').css("display", "block");
+                        //alert("NIE WSZYSTKIE DOBRE");
+                    } else if (someWrongCheck && !someRightCheck) {
+                        //są zaznaczone same złe odpowiedzi
+                        $('.incorrect_message').css("display", "block");
+                        //alert("SAMZE ZŁE");
+                    }
+                    
+                    $('.grey_background').css("display", "block");
+                    
+                };
+            });
+        </script>
+	</body>
+	
+</html>
