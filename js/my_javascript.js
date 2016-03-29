@@ -49,13 +49,13 @@ $(document).ready(function () {
 		$(this).slideUp();
 		$('.correct_message').css("display", "none");
 		$('.incorrect_message').css("display", "none");
-<<<<<<< HEAD
+
 		$('.almost_correct_message').css("display", "none");
 		$('.correct_and_incorrect_message').css("display", "none");
-=======
+
 		$('.some_right_message').css("display", "none");
 		$('.wrong_and_right_message').css("display", "none");
->>>>>>> f879927e66dc4c91f05556cb42f26ee12a9fd93c
+
 	});
 	
 });

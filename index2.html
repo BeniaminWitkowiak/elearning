@@ -23,7 +23,7 @@
 		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
 		</script>
 		<script>
-<<<<<<< HEAD
+
 		$(document).ready(function () {
 		var numberOfCorrectAnswers = 3;
 			$('body').on('click', '.multiple_choice_check_button', function () {
@@ -45,33 +45,7 @@
 						//Zaznaczyles dobra odpowiedz, ale to nie jedyna.
 						$('.grey_background').css("display", "block");
 						$('.almost_correct_message').css("display", "block");
-=======
-			$(document).ready(function () {
-				var numberOfCorrectAnswers = 3;
-				$('body').on('click', '.multiple_choice_check_button', function () {
-					
-					if ($('body').find('input.checkbox_true').is(':checked')) {//zaznaczylem min jedna dobra odpowiedz
-						if ($('body').find('input.checkbox_false').is(':checked')) {//zaznaczylem dobra odpowiedz i jakas ze zlych odpowiedzi
-							alert("Jesteś blisko- zaznaczono dobrą i złą odpowiedź.");
-							}else{
-							//ZAZNACZONE SA TYLKO POPRAWNE ODPOWIEDZI, ALE TRZEBA SPR CZY WSZYSTKIE
-							var ile_zaznaczonych = $('body').find('input.checkbox_true:checked').length;
-							//alert("zaznaczonych dobrych jest: " + ile_zaznaczonych);
-							//alert("wszystkich dobrych jest" + numberOfCorrectAnswers);
-							if(ile_zaznaczonych == numberOfCorrectAnswers){
-								//zaznaczylem wszystkie dobre odpowiedzi i NIE ZAZNACZYLEM zadnej zlej
-								$('.next_button').css("display", "block");
-								$('.grey_background').css("display", "block");
-								$('.correct_message').css("display", "block");
-								}else{
-								alert("Zaznaczyles dobra odpowiedz, ale to nie jedyna.");
-							}
-						}
-						}else{
-						//zaznaczylem tylko zla odpowiedz
-						$('.grey_background').css("display", "block");
-						$('.incorrect_message').css("display", "block");
->>>>>>> f879927e66dc4c91f05556cb42f26ee12a9fd93c
+
 					}
 					
 				});
