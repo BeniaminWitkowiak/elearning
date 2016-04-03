@@ -68,14 +68,6 @@
 					    </label>
 				    </form>
                 </div>
-				
-                <!--Podpowiedzi do zadania-->
-				<div style="display:inline-block;">
-					<h3>PODPOWIEDŹ 1 <input type="checkbox" ng-model="hint1"></h3>
-					<div ng-hide="!hint1">
-						<p>`\Delta = b^2 - 4ac`</p>
-					</div>
-				</div>
 			</div>
 			
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
@@ -100,13 +92,15 @@
             var app = angular.module('app', []);
             app.controller('task', function ($scope) {
                 $scope.check = function () {
-                    if ($scope.task_opt === "true") {							
+                    //jeśli zaznaczona zosała poprawna odpowiedź
+                    if ($scope.task_opt === "true") {
                         $('.next_button').css("display", "block");
-					    $('.grey_background').css("display", "block");
-					    $('.correct_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                        $('.correct_message').css("display", "block");
+                        $scope.showNextBtt = true;
                     } else {
-					    $('.grey_background').css("display", "block");
-					    $('.incorrect_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                        $('.incorrect_message').css("display", "block");
                     }
                 };
             });
