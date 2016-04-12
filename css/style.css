@@ -173,31 +173,54 @@ a:hover{
 	z-index:9;
 	display:none;
 }
-.incorrect_message{
-	display:none;
-		padding-top:30px;
-	padding-bottom:30px;
-	background-color:#FFAAAA;
-	margin-top:10%;
-	margin:5px solid white;
-}
+
 
 .correct_message{
 	display:none;
+	margin-top:10%;
+}
+.correct_message div{
 	background-color:#88CC88;
-		padding-top:30px;
-	padding-bottom:30px;
-	margin-top:10%;
-	margin:5px solid white;
+	padding-top:20px;
+	padding-bottom:20px;
 }
-.almost_correct_message{
+.incorrect_message{
 	display:none;
-	background-color:#FFFFAA;
-		padding-top:30px;
-	padding-bottom:30px;
 	margin-top:10%;
-	margin:5px solid white;
 }
+.incorrect_message div{
+	background-color:#FFAAAA;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.some_right_message {
+	display:none;
+	margin-top:10%;
+}
+.some_right_message div{
+	background-color:#d1db72;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.wrong_and_right_message{
+	display:none;
+	
+	margin-top:10%;
+}
+.wrong_and_right_message div{
+	background-color:#FFAAAA;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+
+
+
+
+
+
+
+
 .correct_and_incorrect_message{
 	display:none;
 	background-color:#6C939F;
@@ -206,6 +229,19 @@ a:hover{
 	margin-top:10%;
 	margin:5px solid white;
 }
+
+
+
+
+
+.almost_correct_message{
+	display:none;
+	background-color:#FFFFAA;
+	padding-top:30px;
+	padding-bottom:30px;
+	margin-top:10%;
+}
+
 .span_message{
 	/*position:absolute; 
 	top:50%; 
@@ -213,21 +249,8 @@ a:hover{
 	left:22%;*/
 }
 
-.some_right_message {
-	display:none;
-	background-color:#d1db72;
-	height:30vh;
-	margin-top:10%;
-	margin:5px solid white;
-}
 
-.wrong_and_right_message{
-	display:none;
-	background-color:#FFAAAA;
-	height:30vh;
-	margin-top:10%;
-	margin:5px solid white;
-}
+
 .popup {
   box-shadow: 0 0 50px #888888;
   z-index: 9999;
