@@ -70,13 +70,18 @@
                 </div>
 				
                 <!--Podpowiedzi do zadania-->
+                <!--Kolejne podpowiedzi dodajemy analogicznie, zwiększając parametr przekazany w hint(index) oraz show_hint[param] o jeden, nie trzeba nic więcej zmieniać.-->
 				<div style="display:inline-block;">
-					<h3>PODPOWIEDŹ 1 <input type="checkbox" ng-model="hint1"></h3>
-					<div ng-hide="!hint1">
+					<h3  ng-click="hint(0)">PODPOWIEDŹ 1</h3>
+					<div ng-show="show_hint[0]">
 						<p>`\Delta = b^2 - 4ac`</p>
-                        <span>Dalsza podpowiedź  <input type="checkbox" ng-model="hint2"></span>
-						<div ng-hide="!hint2">
+                        <span ng-click="hint(1)">Dalsza podpowiedź</span>
+						<div ng-show="show_hint[1]">
 						    <p>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$</p>
+                            <span ng-click="hint(2)">Podpowiedź nr 3</span>
+						    <div ng-show="show_hint[2]">
+						        <p>Treść podpowiedzi nr 3</p>
+					        </div>
 					    </div>
 					</div>
 				</div>
@@ -109,13 +114,21 @@
             var app = angular.module('app', []);
             app.controller('task', function ($scope) {
                 $scope.check = function () {
-                    if ($scope.task_opt === "true") {							
+                    if ($scope.task_opt === "true") {
                         $('.next_button').css("display", "block");
-					    $('.grey_background').css("display", "block");
-					    $('.correct_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                        $('.correct_message').css("display", "block");
                     } else {
-					    $('.grey_background').css("display", "block");
-					    $('.incorrect_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                        $('.incorrect_message').css("display", "block");
+                    }
+                };
+                $scope.show_hint = [];
+                $scope.hint = function (index) {
+                    if (index === $scope.show_hint.length) {
+                        $scope.show_hint.push(true);
+                    } else {
+                        $scope.show_hint[index] = !$scope.show_hint[index];
                     }
                 };
             });

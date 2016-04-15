@@ -67,9 +67,10 @@
 					</label>
 				</form>
                 <div style="display:inline-block;">
-					<h3 ng-click="show()">PODPOWIEDŹ</h3>
-					<div ng-hide="!myCheck">
-						<p>Tresć podpowiedzi</p>
+					<h3 ng-click="hint(0)">PODPOWIEDŹ</h3>
+					<div ng-show="show_hint[0]">
+						<p>Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj 
+                        Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj Tresć podpowiedzi wstaw tutaj </p>
 				    </div>
 				</div>
 			</div>
@@ -108,9 +109,13 @@
                         $('.incorrect_message').css("display", "block");
                     }
                 };
-
-                $scope.show = function () {
-                   $scope.myCheck = !$scope.myCheck;
+                $scope.show_hint = [];
+                $scope.hint = function (index) {
+                    if (index === $scope.show_hint.length) {
+                        $scope.show_hint.push(true);
+                    } else {
+                        $scope.show_hint[index] = !$scope.show_hint[index];
+                    }
                 };
             });
         </script>
