@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Tworzenie materiałóww e-learningowych
+		</title>
+		
+		<meta charset="utf-8">	
+		
+		<!-- STYLES -->	
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/style_checkbox_green.css" rel="stylesheet">
+		
+		<!-- SCRIPTS -->
+		<script src="../js/jquery-1.11.3.js"></script>
+		<script src="../js/my_javascript.js"></script>
+		<script src="../js/angular.js"></script>	
+        <script type="text/javascript" async
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+		
+		<!-- FAVICON -->
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="favicon.ico">
+		
+		
+	</head>
+	
+	
+	
+	<body ng-app="app" ng-controller="geogebra">
+	
+			<!--MENU-->
+		<div class="col-xs-2">
+			<div ng-include="'menu.html'"></div>
+		</div>
+		<div class="col-xs-8 col-xs-offset-1" >
+			<div class="container margin-top-30 bg-info col-xs-12">
+				<div class="text-center">
+					<span class="apexnew-medium rozmiar36">Tworzenie materiałów e-learningowych {{geogebra_width}}</span>
+				</div>
+			</div>
+			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
+				<h2>Zadanie 1</h2>
+                <a href="https://www.geogebra.org/material/gsites/id/116064/width/80/height/440">dsadasdas</a>
+			    <div id="geogebra_div"class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
+                    <iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/2203759/width/1000/height/1000/border/888888/rc/true/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/true/at/auto" width="{{geogebra_width}}px" height="{{geogebra_height}}px" style="border:0px;"> </iframe>
+				    <div class="col-xs-12 col-sm-6" style="border:0px solid blue">
+					    <a ng-click="check()" href="#"><div class="button text-center apexnew-medium">Back</div></a>
+				    </div>	
+			    </div>
+			
+			    <div class="col-xs-12 black_font apexnew-light rozmiar14 text-left" style="margin-top:15px; padding-left:24px">
+				    <!-- *pola obowiązkowe-->
+			    </div>
+			
+		    </div>
+    </div>
+		
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script src='../js/bootstrap.min.js'></script>
+        <script>
+            var app = angular.module('app', []);
+            app.controller('geogebra', ['$scope', '$window', function ($scope, $window) {
+                /*
+                $scope.w = angular.element($window);
+                $scope.myEl = angular.element(document.getElementById("geogebra_div"));
+                $scope.geogebra_width = $scope.myEl.width();
+                $scope.geogebra_height = $scope.myEl.width();
+                $scope.check = function () {
+                    $scope.geogebra_width = $scope.myEl.width();
+                    $scope.geogebra_height = $scope.myEl.width() / 2;
+                };
+                alert("ustawiło się")
+                $scope.w.bind('resize', function () {
+                    $scope.check();
+                    $scope.geogebra_width = 2*$scope.myEl.width();
+                    $scope.geogebra_height = 2*$scope.myEl.width();
+                    console.log($scope.geogebra_width + " " + $scope.geogebra_height);
+                });
+                */
+            } ]);
+        </script>
+	</body>
+	
+</html>
