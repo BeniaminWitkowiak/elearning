@@ -30,7 +30,7 @@
 	
 	
 	
-	<body ng-app="app" ng-controller="task">
+	<body ng-app="app" ng-controller="task" ng-keypress="keyPressed()">
 	
 			<!--MENU-->
 		<div class="col-xs-2">
@@ -56,14 +56,18 @@
 				<h2>Zadanie 1</h2>
 				<p>Pierwiastkiem równania `x^2 - 2x + 4 = 0` jest</p>
 				<form role="form">
+                    <!--Każdy znacznik input ma swoje unikalne id, które wykorzystywane jest do zaznaczania przy pomocy klawiatury, standardowo mamy 3-4 odpowiedzi, każda ma id postaci odp<numer-odpowiedzi>-->
 					<label class="radio">
-						<input type="radio" name="optradio" ng-model="task_opt" value="true">Poprawna
+						<input id="odp1"  type="radio" name="optradio" ng-model="task_opt" value="true">Poprawna
 					</label>
 					<label class="radio">
-						<input type="radio" name="optradio">Zła
+						<input  id="odp2" type="radio" name="optradio">Zła
 					</label>
 					<label class="radio">
-						<input type="radio" name="optradio">Zła
+						<input  id="odp3" type="radio" name="optradio">Zła
+					</label>
+					<label class="radio">
+						<input  id="odp4" type="radio" name="optradio">Zła
 					</label>
 				</form>
                 <div style="display:inline-block;">
@@ -116,6 +120,31 @@
                     } else {
                         $scope.show_hint[index] = !$scope.show_hint[index];
                     }
+                };
+
+                
+               $scope.keyPressed = function() { 
+                    switch(event.which) {  // funkcja wprowadzająca obsługę klawiszy do zaznaczania odpowiedzi
+			          case 49: //  1
+                        document.getElementById("odp1").checked = !document.getElementById("odp1").checked;// po wciśnięciu jedynki zostaje zaznaczony/odznaczony pierwszy checkbox 
+			            break;
+			  
+			            case 50: // 2
+                            document.getElementById("odp2").checked = !document.getElementById("odp2").checked
+			                break;
+			  
+			            case 51: // 3
+                            document.getElementById("odp3").checked = !document.getElementById("odp3").checked
+			                break;
+			  
+			              case 52: // 4
+                            document.getElementById("odp4").checked = !document.getElementById("odp4").checked
+			                break;
+                        case 13:
+                            $scope.check();    
+                            break;	
+			            default: return; // exit this handler for other keys
+		            }
                 };
             });
         </script>

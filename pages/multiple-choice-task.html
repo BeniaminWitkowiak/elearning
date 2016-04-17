@@ -28,14 +28,14 @@
 		
 	</head>
 	
-	<body ng-app="app" ng-controller="task">
+	<body ng-app="app" ng-controller="task" ng-keypress="keyPressed()">
 	
 			<!--MENU-->
 		<div class="col-xs-2">
 			<div ng-include="'menu.html'"></div>
 		</div>
 
-        <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
+        <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna itd-->
         <div class="grey_background">
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;height:100%;">
@@ -71,20 +71,21 @@
 				<p>Pierwiastkiem równania `x^2 - 2x + 4 = 0` jest</p>
                 <div>
 				    <form role="form">
+                         <!--Każdy znacznik input ma swoje unikalne id, które wykorzystywane jest do zaznaczania przy pomocy klawiatury, standardowo mamy 3-4 odpowiedzi, każda ma id postaci odp<numer-odpowiedzi>-->
 					    <label class="checkbox">
-						    <input type="checkbox" ng-model="right1">Poprawna1
+						    <input id="odp1" type="checkbox" ng-model="right1">Poprawna1
 					    </label>
 					    <label class="checkbox">
-						    <input type="checkbox" ng-model="wrong1">Zła
+						    <input id="odp2" type="checkbox" ng-model="wrong1">Zła
 					    </label>
 					    <label class="checkbox">
-						    <input type="checkbox" ng-model="wrong2">Zła
+						    <input id="odp3" type="checkbox" ng-model="wrong2">Zła
 					    </label>
 					    <label class="checkbox">
-						    <input type="checkbox" ng-model="right2">Poprawna2
+						    <input id="odp4" type="checkbox" ng-model="right2">Poprawna2
 					    </label>
 					    <label class="checkbox">
-						    <input type="checkbox" ng-model="right3">Poprawna3
+						    <input id="odp5" type="checkbox" ng-model="right3">Poprawna3
 					    </label>
 				    </form>
                 </div>
@@ -116,25 +117,47 @@
                     //same dobre i nie ma żadnej złej
                     if (allRightCheck && !someWrongCheck) {
                         $('.correct_message').css("display", "block");
-                        //alert("Wszystkie ok");
                     } else if (someRightCheck && someWrongCheck) {
                         // są zaznaczone złe i dobre
                         $('.wrong_and_right_message').css("display", "block");
-                        //alert("ZŁE I DOBRE");
                     } else if (someRightCheck && !someWrongCheck && !allRightCheck) {
                         // nie wszystkie dobre są zaznaczone
                         $('.some_right_message').css("display", "block");
-                        //alert("NIE WSZYSTKIE DOBRE");
                     } else if (someWrongCheck && !someRightCheck) {
                         //są zaznaczone same złe odpowiedzi
                         $('.incorrect_message').css("display", "block");
-                        //alert("SAMZE ZŁE");
                     }
                     
                     $('.grey_background').css("display", "block");
                     
                 };
-            });
+                $scope.keyPressed = function() { 
+                    switch(event.which) {  // funkcja wprowadzająca obsługę klawiszy do zaznaczania odpowiedzi
+			          case 49: //  1
+                        document.getElementById("odp1").checked = !document.getElementById("odp1").checked;// po wciśnięciu jedynki zostaje zaznaczony/odznaczony pierwszy checkbox 
+			            break;
+			  
+			            case 50: // 2
+                            document.getElementById("odp2").checked = !document.getElementById("odp2").checked
+			                break;
+			  
+			            case 51: // 3
+                            document.getElementById("odp3").checked = !document.getElementById("odp3").checked
+			                break;
+			  
+			              case 52: // 4
+                            document.getElementById("odp4").checked = !document.getElementById("odp4").checked
+			                break;
+			              case 53: // 5
+                            document.getElementById("odp5").checked = !document.getElementById("odp5").checked
+			                break;
+                          case 13: //Enterem odpalamy sprawdzenie
+                            $scope.check();    
+                            break;	
+			            default: return; // exit this handler for other keys
+		            }
+                };
+             });
         </script>
 	</body>
 	

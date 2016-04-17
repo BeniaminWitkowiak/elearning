@@ -105,31 +105,31 @@
                     }
                 };
 
-               $scope.keyPressed=function(){ 
-                switch(event.which) {  // funkcja wprowadzająca obsługę klawiszy do zaznaczania odpowiedzi
-			      case 49: //  1
-                    document.getElementById("odp1").checked = !document.getElementById("odp1").checked;// po wciśnięciu jedynki zostaje zaznaczony/odznaczony pierwszy checkbox 
-			        break;
-			  
-			        case 50: // 2
-                        document.getElementById("odp2").checked = !document.getElementById("odp2").checked
+               $scope.keyPressed = function() { 
+                    switch(event.which) {  // funkcja wprowadzająca obsługę klawiszy do zaznaczania odpowiedzi
+			          case 49: //  1
+                        document.getElementById("odp1").checked = !document.getElementById("odp1").checked;// po wciśnięciu jedynki zostaje zaznaczony/odznaczony pierwszy checkbox 
 			            break;
 			  
-			        case 51: // 3
-                        document.getElementById("odp3").checked = !document.getElementById("odp3").checked
-			            break;
+			            case 50: // 2
+                            document.getElementById("odp2").checked = !document.getElementById("odp2").checked
+			                break;
 			  
-			          case 52: // 4
-                        document.getElementById("odp4").checked = !document.getElementById("odp4").checked
-			            break;
-                    case 13:
-                        $scope.sprawdzam();    
-                        break;	
-			        default: return; // exit this handler for other keys
-		    }
-    };
+			            case 51: // 3
+                            document.getElementById("odp3").checked = !document.getElementById("odp3").checked
+			                break;
+			  
+			              case 52: // 4
+                            document.getElementById("odp4").checked = !document.getElementById("odp4").checked
+			                break;
+                        case 13:
+                            $scope.check();    
+                            break;	
+			            default: return; // exit this handler for other keys
+		            }
+                };
 
-            });
+             });
 
 
         </script>
