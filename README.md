@@ -1,6 +1,11 @@
 # elearning-
 
 1. Otwierajcie w firefoxie jeśli chcecie mieć widoczne menu ;)
+	Jeśli chcecie testować lokalnie na chromie to macie dwie opcje:
+		Odpalać stronki przy użyciu servera: najprościej zainstalwować sobie 'brackets' albo 'web matrix', które pozwolą wam edytować i testować
+	
+		Druga opcja wymaga odpalenia chroma tak żeby pozwalał nam załączać lokalne pliki, instrukcję jak to zrobić znajdziecie tutaj: http://www.chrome-allow-file-access-from-file.com/windows.html
+
 
 2. Multiple chhoice task
 	W znaczniku `form` ustawiasz propowane odpowiedzi, dodając każdej znacznik ng-model="wrong-nr"/"right-nr" - każdy kolejny musi mieć unikalną wartość.
