@@ -45,12 +45,12 @@
         <div class="grey_background">
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;height:100%;">
-				<span style="">POPRAWNA ODPOWIEDŹ</span>
+				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
 				</div>
 			</div>
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;">
-				<span style="">BŁĘDNA ODPOWIEDŹ</span>
+				<span style="">{{zadanie.wiadomoscBlad}}</span>
 				</div>
 			</div>
 		</div>
@@ -63,16 +63,10 @@
 			</div>
 			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
 				<h2>Zadanie 1</h2>
-				<p>Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest</p>
+				<p>{{zadanie.tresc}}</p>
 				<form role="form">
-					<label class="radio">
-						<input type="radio" name="optradio" ng-model="task_opt" value="true" required>Poprawna
-					</label>
-					<label class="radio">
-						<input type="radio" name="optradio">Zła
-					</label>
-					<label class="radio">
-						<input type="radio" name="optradio">Zła
+					<label ng-repeat="odp in zadanie.odpowiedzi" class="radio">
+						<input type="radio" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
 					</label>
 				</form>
 			    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
@@ -97,9 +91,43 @@
         <script>
             var app = angular.module('app', []);
             app.controller('task', function ($scope) {
+                //Tutaj podajemy tresc zadania:
+                $scope.zadanie = {
+                    tresc: "Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest",
+                    wiadomoscPoprawna : "Zaznaczyles dobra wiadomosc, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                    wiadomoscBlad : "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                    //mozliwe odpowiedzi
+                    odpowiedzi: [
+                        {
+                            tresc: "Poprawna odpowiedz",
+                            poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                            zaznaczona: false // tutaj dajemy zawsze na false
+                        },
+                        {
+                            tresc: "Błędna odpowiedz1",
+                            poprawna: false,
+                            zaznaczona: false
+                        },
+                        {
+                            tresc: "Błędna odpowiedz 2",
+                            poprawna: false,
+                            zaznaczona: false
+                        }
+                    ]
+                };
 
+                //Tutaj raczej nie nalezy nic zmieniac
                 $scope.check = function () {
-                    if ($scope.task_opt === "true") {
+                    var correct = true;
+                    //sprawdzanie czy zaznaczona odpowiedz jest poprawna, tj
+                    for (i = 0; i < $scope.zadanie.odpowiedzi.length; i++) {
+                        var odp = $scope.zadanie.odpowiedzi[i];
+                        if ((odp.poprawna && !odp.zaznaczona) || (!odp.poprawna && odp.zaznaczona)) {
+                            correct = false;
+                        }
+                    }
+                    //wyswietlanie powiadomienia
+                    if (correct) {
                         $('.next_button').css("display", "block");
                         $('.grey_background').css("display", "block");
                         $('.correct_message').css("display", "block");
@@ -107,6 +135,12 @@
                     } else {
                         $('.grey_background').css("display", "block");
                         $('.incorrect_message').css("display", "block");
+                    }
+                    //czyszczenie
+                    for (i = 0; i < $scope.zadanie.odpowiedzi.length; i++) {
+                        if (!$scope.zadanie.odpowiedzi[i].poprawna) {
+                            $scope.zadanie.odpowiedzi[i].zaznaczona = false;
+                        }
                     }
                 };
             });
