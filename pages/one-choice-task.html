@@ -69,13 +69,18 @@
 						<input type="radio" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
 					</label>
 				</form>
+                <!--Część odpowiedzialna za wyświetlanie podpowiedzi-->
+                <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
+                    <h3 ng-show="podp.pokaz || $first" ng-click="showHideHint($index)">{{podp.info}}</h3> <!--Tuaj wyswietlamy parametr info każdej podpowiedi-->
+					<p ng-show="podp.pokazTresc">{{podp.tresc}}</p>  <!--Tuaj wyswietlamy treść każdej podpowiedi-->
+				</div>
 			    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
 				    <div class="col-xs-12 col-sm-6" style="border:0px solid blue">
-					    <a href="#"><div class="button text-center apexnew-medium">Back</div></a>
+					    <a href="#"><div class="button text-center apexnew-medium">Wstecz</div></a>
 				    </div>
 				
 				    <div class="col-xs-12 col-sm-6 margin-for-xs" style="border:0px solid blue">
-					    <a ng-click="check()"><div class="button check_button text-center apexnew-medium">Check</div></a>
+					    <a ng-click="check()"><div class="button check_button text-center apexnew-medium">Sprawdz</div></a>
 				    </div>	
 			    </div>
 			
@@ -95,8 +100,8 @@
                 //Tutaj podajemy tresc zadania:
                 $scope.zadanie = {
                     tresc: "Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest",
-                    wiadomoscPoprawna : "Zaznaczyles dobra wiadomosc, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
-                    wiadomoscBlad : "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                    wiadomoscPoprawna: "Zaznaczyles dobra wiadomosc, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                    wiadomoscBlad: "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
                     //mozliwe odpowiedzi
                     odpowiedzi: [
                         {
@@ -113,6 +118,32 @@
                             tresc: "Błędna odpowiedz 2",
                             poprawna: false,
                             zaznaczona: false
+                        }
+                    ],
+                    podpowiedzi: [
+                        {
+                            info: "Podpowiedz 1", // napis, na ktory klikamy aby wyswietlic podpowieedz
+                            tresc: "$$\Delta = b^2 - 4ac$$", // tresc podpowiedzi, resztę tylko przepisujemy, nic nie trzeba zmieniać
+                            pokaz: true, // tylko w pierwszej podpowiedzi ustawiamy aby była widoczna, bez tego nie mamy gdzie kliknąć aby wyświetlić pierwszą podpowiedź.
+                            pokazTresc: false
+                        },
+                        {
+                            info: "Podpowiedz 2",
+                            tresc: "$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$",
+                            pokaz: false,
+                            pokazTresc: false
+                        },
+                        {
+                            info: "Podpowiedz 3",
+                            tresc: "$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$",
+                            pokaz: false,
+                            pokazTresc: false
+                        },
+                        {
+                            info: "Podpowiedz 4",
+                            tresc: "TRESC PODPOWIEDZI NR 5",
+                            pokaz: false,
+                            pokazTresc: false
                         }
                     ]
                 };
@@ -141,6 +172,20 @@
                     for (i = 0; i < $scope.zadanie.odpowiedzi.length; i++) {
                         if (!$scope.zadanie.odpowiedzi[i].poprawna) {
                             $scope.zadanie.odpowiedzi[i].zaznaczona = false;
+                        }
+                    }
+                };
+
+                $scope.showHideHint = function (index) {
+                    $scope.zadanie.podpowiedzi[index].pokazTresc = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+
+                    for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
+                        console.log("for z i= " + i);
+                        $scope.zadanie.podpowiedzi[i].pokazTresc = false;
+                        if (i == (index + 1)) {
+                            $scope.zadanie.podpowiedzi[i].pokaz = !$scope.zadanie.podpowiedzi[i].pokaz;
+                        } else {
+                            $scope.zadanie.podpowiedzi[i].pokaz = false;
                         }
                     }
                 };

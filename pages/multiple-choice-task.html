@@ -187,18 +187,21 @@
                     //same dobre i nie ma żadnej złej
                     if (allRightCheck && !someWrongCheck) {
                         $('.correct_message').css("display", "block");
+                    $('.grey_background').css("display", "block");
                     } else if (someRightCheck && someWrongCheck) {
                         // są zaznaczone złe i dobre
                         $('.wrong_and_right_message').css("display", "block");
+                    $('.grey_background').css("display", "block");
                     } else if (someRightCheck && !someWrongCheck && !allRightCheck) {
                         // nie wszystkie dobre są zaznaczone
                         $('.some_right_message').css("display", "block");
+                    $('.grey_background').css("display", "block");
                     } else if (someWrongCheck && !someRightCheck) {
                         //są zaznaczone same złe odpowiedzi
                         $('.incorrect_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
                     }
 
-                    $('.grey_background').css("display", "block");
 
                 };
 
@@ -215,24 +218,6 @@
                         }
                     }
                 }
-                $scope.range = function (min, max, step) {
-                    step = step || 1;
-                    var input = [];
-                    for (var i = min; i <= max; i += step) {
-                        input.push(i);
-                    }
-                    return input;
-                };
-                //funkcja odpowiedzialna za wyświetlanie podpowiedzi przez kliknięcie na napis
-                $scope.show_hint = [];
-                $scope.hint = function (index) {
-                    if (index === $scope.show_hint.length) {
-                        $scope.show_hint.push(true);
-                    } else {
-                        $scope.show_hint[index] = !$scope.show_hint[index];
-                    }
-                };
-
                 //obsługa klawiatury
                 $scope.keyPressed = function () {
                     switch (event.which) {  // funkcja wprowadzająca obsługę klawiszy do zaznaczania odpowiedzi
