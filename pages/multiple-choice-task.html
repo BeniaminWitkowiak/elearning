@@ -43,24 +43,24 @@
         <div class="grey_background">
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;height:100%;">
-				<span style="">POPRAWNA ODPOWIEDŹ</span>
+				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
 				</div>
 			</div>
 			
 			
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 some_right_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;">
-				<span style="">NIE ZAZNACZONO WSZYSTKICH POPRAWNYCH ODPOWIEDZI</span>
+				<span style="">{{zadanie.wiadomoscNieWszystkieDobre}}</span>
 				</div>
 			</div>
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;">
-				<span style="">BŁĘDNA ODPOWIEDŹ</span>
+				<span style="">{{zadanie.wiadomoscBlad}}</span>
 				</div>
 			</div>
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 wrong_and_right_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;">
-				<span style="">ZAZNACZONO POPRAWNE I BŁĘDNE ODPOWIEDZI</span>
+				<span style="">{{zadanie.wiadomoscDobreIZle}}</span>
 				</div>
 			</div>
 		</div>
@@ -71,32 +71,29 @@
 				</div>
 			</div>
 			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
+                        <!--Każdy znacznik input ma swoje unikalne id, które wykorzystywane jest do zaznaczania przy pomocy klawiatury, standardowo mamy 3-4 odpowiedzi, każda ma id postaci odp<numer-odpowiedzi>-->
 				<h2>Zadanie 1</h2>
-				<p>Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest</p>
-                <div>
-				    <form role="form">
-                         <!--Każdy znacznik input ma swoje unikalne id, które wykorzystywane jest do zaznaczania przy pomocy klawiatury, standardowo mamy 3-4 odpowiedzi, każda ma id postaci odp<numer-odpowiedzi>-->
-					    <label class="checkbox">
-						    <input id="odp1" type="checkbox" ng-model="right1">Poprawna1
-					    </label>
-					    <label class="checkbox">
-						    <input id="odp2" type="checkbox" ng-model="wrong1">Zła
-					    </label>
-					    <label class="checkbox">
-						    <input id="odp3" type="checkbox" ng-model="wrong2">Zła
-					    </label>
-					    <label class="checkbox">
-						    <input id="odp4" type="checkbox" ng-model="right2">Poprawna2
-					    </label>
-					    <label class="checkbox">
-						    <input id="odp5" type="checkbox" ng-model="right3">Poprawna3
-					    </label>
-				    </form>
-                </div>
+				<p>{{zadanie.tresc}}</p>
+				<form role="form">
+					<label ng-repeat="odp in zadanie.odpowiedzi" class="radio">
+						<input type="checkbox" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
+					</label>
+				</form>
+                <!-- ZMIENIĆ ŻEBY BYŁO PO PARENCIE-->
                 <!--Podpowiedzi do zadania-->
                 <!--Kolejne podpowiedzi dodajemy analogicznie, zwiększając parametr przekazany w hint(index) oraz show_hint[param] o jeden, nie trzeba nic więcej zmieniać.-->
 				<div style="display:inline-block;">
-					<h3  ng-click="hint(0)">PODPOWIEDŹ 1</h3>
+                    <div id="hint_renderer.html">
+                        
+                    </div>
+                    <ul>
+                        <li ng-repeat="n in range(0, zadanie.podpowiedzi.length - 1)">Number {{n}}</li>
+                    </ul>
+                    <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
+                        <h3 ng-show="podp.pokaz || podp.pokazZawsze" ng-click="showHideHint($index)">{{podp.info}} index: {{$index}}</h3>
+						<p ng-show="podp.pokaz">{{podp.tresc}}</p>
+					</div>
+					<h3  ng-click="hint(0)">PODPOWIEDŹ</h3>
 					<div ng-show="show_hint[0]">
 						<p>$$\Delta = b^2 - 4ac$$</p>
                         <span ng-click="hint(1)">Dalsza podpowiedź</span>
@@ -128,11 +125,83 @@
         <script>
             var app = angular.module('app', []);
             app.controller('task', function ($scope) {
-                $scope.check = function () {                    
+                //Tutaj wypelniasz resc zadania
+                $scope.zadanie = {
+                    tresc: "Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest",
+                    wiadomoscPoprawna: "Zaznaczyles wszystkie dobre odpowiedzi, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                    wiadomoscBlad: "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                    wiadomoscDobreIZle: "Zaznaczono dobre i zle odpowiedzi", // wiadomosc do wyswietlenia jak mamy dobra i zla wiadomosc
+                    wiadomoscNieWszystkieDobre: "Nie zaznaczono wszystkich prawidlowych odpowiedzi", // wiadomosc wyswietlona jak nie wszystke dore odpowiedzi zostaly zaznaczone-
+                    //mozliwe odpowiedzi
+                    odpowiedzi: [
+                        {
+                            tresc: "Poprawna odpowiedz 1",
+                            poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                            zaznaczona: false // tutaj dajemy zawsze na false
+                        },
+                        {
+                            tresc: "Błędna odpowiedz 1",
+                            poprawna: false,
+                            zaznaczona: false
+                        },
+                        {
+                            tresc: "Błędna odpowiedz 2",
+                            poprawna: false,
+                            zaznaczona: false
+                        },
+                        {
+                            tresc: "Poprawna odpowiedz 2",
+                            poprawna: true,
+                            zaznaczona: false
+                        },
+                        {
+                            tresc: "Błędna odpowiedz 3",
+                            poprawna: false,
+                            zaznaczona: false
+                        },
+                        {
+                            tresc: "Poprawna odpowiedz 3",
+                            poprawna: true,
+                            zaznaczona: false
+                        }
+                    ],
+                    podpowiedzi: [
+                        {
+                            info: "Podpowiedz 1",
+                            tresc: "$$\Delta = b^2 - 4ac$$",
+                            pokaz: false,
+                            pokazZawsze: true
+                        },
+                        {
+                            info: "Podpowiedz 2",
+                            tresc: "$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$",
+                            pokaz: false
+                        },
+                        {
+                            info: "Podpowiedz 3",
+                            tresc: "TRESC PODPOWIEDZI NR 3",
+                            pokaz: false
+                        }
+                    ]
+                };
+
+                //funckcja sprawdzajaca odpowiedz
+                $scope.check = function () {
                     //Ustawiamy odpowiednio zmienne, wstawiając w odpowiednie miejsca wszystkie dobre / złe odopwiedzi
-                    var allRightCheck = $scope.right1 && $scope.right2  && $scope.right3;
-                    var someRightCheck = $scope.right1 || $scope.right2  || $scope.right3;
-                    var someWrongCheck = $scope.wrong1 || $scope.wrong2;
+                    var allRightCheck = true; //$scope.right1 && $scope.right2  && $scope.right3;
+                    var someRightCheck = false; //$scope.right1 || $scope.right2  || $scope.right3;
+                    var someWrongCheck = false; //$scope.wrong1 || $scope.wrong2;
+
+                    for (i = 0; i < $scope.zadanie.odpowiedzi.length; i++) {
+                        var odp = $scope.zadanie.odpowiedzi[i];
+                        if (odp.poprawna) {
+                            allRightCheck = allRightCheck && odp.zaznaczona;
+                            someRightCheck = someRightCheck || odp.zaznaczona;
+                        } else {
+                            someWrongCheck = someWrongCheck || odp.zaznaczona;
+                        }
+
+                    }
 
                     //wyświetlanie wiadomości po wciśnięciu check
                     //same dobre i nie ma żadnej złej
@@ -148,11 +217,30 @@
                         //są zaznaczone same złe odpowiedzi
                         $('.incorrect_message').css("display", "block");
                     }
-                    
+
                     $('.grey_background').css("display", "block");
-                    
+
                 };
 
+                $scope.showHideHint = function (index) {
+                    console.log("index: " + index);
+                    $scope.zadanie.podpowiedzi[index].pokaz = !$scope.zadanie.podpowiedzi[index].pokaz || !$scope.zadanie.podpowiedzi[index].pokazZawsze;
+                    for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
+                        if (i == index + 1) {
+                            $scope.zadanie.podpowiedzi[i].pokaz = true;
+                        } else {
+                            $scope.zadanie.podpowiedzi[i].pokaz = false;                            
+                        }
+                    }
+                }
+                $scope.range = function (min, max, step) {
+                    step = step || 1;
+                    var input = [];
+                    for (var i = min; i <= max; i += step) {
+                        input.push(i);
+                    }
+                    return input;
+                };
                 //funkcja odpowiedzialna za wyświetlanie podpowiedzi przez kliknięcie na napis
                 $scope.show_hint = [];
                 $scope.hint = function (index) {
@@ -164,33 +252,33 @@
                 };
 
                 //obsługa klawiatury
-                $scope.keyPressed = function() { 
-                    switch(event.which) {  // funkcja wprowadzająca obsługę klawiszy do zaznaczania odpowiedzi
-			          case 49: //  1
-                        document.getElementById("odp1").checked = !document.getElementById("odp1").checked;// po wciśnięciu jedynki zostaje zaznaczony/odznaczony pierwszy checkbox 
-			            break;
-			  
-			            case 50: // 2
+                $scope.keyPressed = function () {
+                    switch (event.which) {  // funkcja wprowadzająca obsługę klawiszy do zaznaczania odpowiedzi
+                        case 49: //  1
+                            document.getElementById("odp1").checked = !document.getElementById("odp1").checked; // po wciśnięciu jedynki zostaje zaznaczony/odznaczony pierwszy checkbox 
+                            break;
+
+                        case 50: // 2
                             document.getElementById("odp2").checked = !document.getElementById("odp2").checked
-			                break;
-			  
-			            case 51: // 3
+                            break;
+
+                        case 51: // 3
                             document.getElementById("odp3").checked = !document.getElementById("odp3").checked
-			                break;
-			  
-			              case 52: // 4
+                            break;
+
+                        case 52: // 4
                             document.getElementById("odp4").checked = !document.getElementById("odp4").checked
-			                break;
-			              case 53: // 5
+                            break;
+                        case 53: // 5
                             document.getElementById("odp5").checked = !document.getElementById("odp5").checked
-			                break;
-                          case 13: //Enterem odpalamy sprawdzenie
-                            $scope.check();    
-                            break;	
-			            default: return; // exit this handler for other keys
-		            }
+                            break;
+                        case 13: //Enterem odpalamy sprawdzenie
+                            $scope.check();
+                            break;
+                        default: return; // exit this handler for other keys
+                    }
                 };
-             });
+            });
         </script>
 	</body>
 	
