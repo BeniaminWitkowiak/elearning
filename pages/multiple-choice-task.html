@@ -79,32 +79,10 @@
 						<input type="checkbox" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
 					</label>
 				</form>
-                <!-- ZMIENIĆ ŻEBY BYŁO PO PARENCIE-->
-                <!--Podpowiedzi do zadania-->
-                <!--Kolejne podpowiedzi dodajemy analogicznie, zwiększając parametr przekazany w hint(index) oraz show_hint[param] o jeden, nie trzeba nic więcej zmieniać.-->
-				<div style="display:inline-block;">
-                    <div id="hint_renderer.html">
-                        
-                    </div>
-                    <ul>
-                        <li ng-repeat="n in range(0, zadanie.podpowiedzi.length - 1)">Number {{n}}</li>
-                    </ul>
-                    <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
-                        <h3 ng-show="podp.pokaz || podp.pokazZawsze" ng-click="showHideHint($index)">{{podp.info}} index: {{$index}}</h3>
-						<p ng-show="podp.pokaz">{{podp.tresc}}</p>
-					</div>
-					<h3  ng-click="hint(0)">PODPOWIEDŹ</h3>
-					<div ng-show="show_hint[0]">
-						<p>$$\Delta = b^2 - 4ac$$</p>
-                        <span ng-click="hint(1)">Dalsza podpowiedź</span>
-						<div ng-show="show_hint[1]">
-						    <p>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$</p>
-                            <span ng-click="hint(2)">Podpowiedź nr 3</span>
-						    <div ng-show="show_hint[2]">
-						        <p>Treść podpowiedzi nr 3</p>
-					        </div>
-					    </div>
-					</div>
+                <!--Część odpowiedzialna za wyświetlanie podpowiedzi-->
+                <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
+                    <h3 ng-show="podp.pokaz || $first" ng-click="showHideHint($index)">{{podp.info}}</h3> <!--Tuaj wyswietlamy parametr info każdej podpowiedi-->
+					<p ng-show="podp.pokazTresc">{{podp.tresc}}</p>  <!--Tuaj wyswietlamy treść każdej podpowiedi-->
 				</div>
 
 			    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
@@ -167,20 +145,22 @@
                     ],
                     podpowiedzi: [
                         {
-                            info: "Podpowiedz 1",
-                            tresc: "$$\Delta = b^2 - 4ac$$",
-                            pokaz: false,
-                            pokazZawsze: true
+                            info: "Podpowiedz 1", // napis, na ktory klikamy aby wyswietlic podpowieedz
+                            tresc: "$$\Delta = b^2 - 4ac$$", // tresc podpowiedzi, resztę tylko przepisujemy, nic nie trzeba zmieniać
+                            pokaz: true, // tylko w pierwszej podpowiedzi ustawiamy aby była widoczna, bez tego nie mamy gdzie kliknąć aby wyświetlić pierwszą podpowiedź.
+                            pokazTresc: false
                         },
                         {
                             info: "Podpowiedz 2",
                             tresc: "$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$",
-                            pokaz: false
+                            pokaz: false,
+                            pokazTresc: false
                         },
                         {
                             info: "Podpowiedz 3",
                             tresc: "TRESC PODPOWIEDZI NR 3",
-                            pokaz: false
+                            pokaz: false,
+                            pokazTresc: false
                         }
                     ]
                 };
@@ -223,13 +203,15 @@
                 };
 
                 $scope.showHideHint = function (index) {
-                    console.log("index: " + index);
-                    $scope.zadanie.podpowiedzi[index].pokaz = !$scope.zadanie.podpowiedzi[index].pokaz || !$scope.zadanie.podpowiedzi[index].pokazZawsze;
+                    $scope.zadanie.podpowiedzi[index].pokazTresc = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+
                     for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
-                        if (i == index + 1) {
-                            $scope.zadanie.podpowiedzi[i].pokaz = true;
+                        console.log("for z i= " + i);
+                        $scope.zadanie.podpowiedzi[i].pokazTresc = false;
+                        if (i == (index + 1)) {
+                            $scope.zadanie.podpowiedzi[i].pokaz = !$scope.zadanie.podpowiedzi[i].pokaz;
                         } else {
-                            $scope.zadanie.podpowiedzi[i].pokaz = false;                            
+                            $scope.zadanie.podpowiedzi[i].pokaz = false;
                         }
                     }
                 }
