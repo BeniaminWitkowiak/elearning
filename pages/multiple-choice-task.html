@@ -34,8 +34,8 @@
 	
 	<body ng-app="app" ng-controller="task" ng-keypress="keyPressed()">
 	
-			<!--MENU-->
-		<div class="col-xs-2">
+			<!--MENU DLA WSZYSTKICH ROZCZIELCZOSCI OPROCZ NAJMNIEJSZYCH (dla najmniejszych ponizej)-->
+		<div class="col-sm-2 hidden-xs">
 			<div ng-include="'menu.html'"></div>
 		</div>
 
@@ -98,6 +98,13 @@
 			
 		    </div>
 		</div>
+		
+			<!--MENU TYLKO DLA NAJMNIEJSZYCH ROZDZIELCZOSCI-->
+		<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+			<div ng-include="'menu.html'"></div>
+		</div>
+		
+		
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 		<script src='../js/bootstrap.min.js'></script>
         <script>

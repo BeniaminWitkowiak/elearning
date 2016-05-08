@@ -23,12 +23,7 @@
 		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
 		</script>
 		
-<style>
-.cssStyle{ width: 100px; height: 90px; background: red; z-index:2;}
-.cssStyle.ui-draggable-dragging { opacity:0.4; }
-.cssStyle2{ float: right; width: 100px; height: 90px; border: 2px dashed #999; border-radius: 3px; }
-.pytanieIodpowiedz {margin-top:20px;}
-</style>
+
  
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
@@ -69,6 +64,9 @@ function init() {
 			"border" : "0px solid red"
 		});
 	}
+	if(!$('#pytanie2').is(':visible') && !$('#pytanie3').is(':visible') && !$('#pytanie4').is(':visible') && !$('#pytanie5').is(':visible')) {
+		alert("Wszystkie odpowiedzi sa poprawne.")
+	}
 }
 function chceckOdpowiedz2( event, ui ) {
 	var draggable = ui.draggable;
@@ -78,7 +76,10 @@ function chceckOdpowiedz2( event, ui ) {
 			"background-color" : "green", 
 			"border" : "0px solid red"
 		});
-	} 
+	}
+	if(!$('#pytanie1').is(':visible') && !$('#pytanie3').is(':visible') && !$('#pytanie4').is(':visible') && !$('#pytanie5').is(':visible')) {
+		alert("Wszystkie odpowiedzi sa poprawne.")
+	}
 }
 function chceckOdpowiedz3( event, ui ) {
 	var draggable = ui.draggable;
@@ -89,6 +90,9 @@ function chceckOdpowiedz3( event, ui ) {
 			"border" : "0px solid red"
 		});
 	} 
+	if(!$('#pytanie1').is(':visible') && !$('#pytanie2').is(':visible') && !$('#pytanie4').is(':visible') && !$('#pytanie5').is(':visible')) {
+		alert("Wszystkie odpowiedzi sa poprawne.")
+	}
 }
 function chceckOdpowiedz4( event, ui ) {
 	var draggable = ui.draggable;
@@ -99,6 +103,9 @@ function chceckOdpowiedz4( event, ui ) {
 			"border" : "0px solid red"
 		});
 	} 
+	if(!$('#pytanie1').is(':visible') && !$('#pytanie2').is(':visible') && !$('#pytanie3').is(':visible') && !$('#pytanie5').is(':visible')) {
+		alert("Wszystkie odpowiedzi sa poprawne.")
+	}
 }
 function chceckOdpowiedz5( event, ui ) {
 	var draggable = ui.draggable;
@@ -124,53 +131,45 @@ function chceckOdpowiedz5( event, ui ) {
 	
 	
 	<body ng-app="">
-		<div class="grey_background">
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message" style="position:relative">
-				<span style="position:absolute; top:50%; transform:translateY(-50%);">YOUR ANSWER IS INCORRECT !!</span>
-			</div>
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message" style="position:relative">
-				<span style="position:absolute; top:50%; transform:translateY(-50%);">YOUR ANSWER IS CORRECT !!</span>
-			</div>
-		</div>
-		<!--MENU-->
-		<div class="col-xs-2">
+		<!--MENU DLA WSZYSTKICH ROZCZIELCZOSCI OPROCZ NAJMNIEJSZYCH (dla najmniejszych ponizej)-->
+		<div class="col-sm-2 hidden-xs">
 			<div ng-include="'menu.html'"></div>
 		</div>
-		<div class="col-xs-8 col-xs-offset-1">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-1">
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
 					<span class="apexnew-medium rozmiar36 responsiveText">Tworzenie materiałów e-learningowych</span>
 				</div>
 			</div>
-			<div class="col-xs-10 col-xs-offset-1" style="border:0px solid red; margin-top:30px;">
-				<div class="col-xs-12" id="content" style="border:1px solid black;">
-					<div class="col-xs-12 text-center apexnew-book rozmiar24"><span class="text-center">Pytanie 1 </span></div>
+			<div class="col-xs-10 col-xs-offset-1 main-div">
+				<div class="col-xs-12" id="content">
+					<div class="col-xs-12 text-center apexnew-book rozmiar24"><span class="text-center">Przykład 1 </span></div>
 					
 					
 					<div class="col-xs-12 no_padding pytanieIodpowiedz">
-						<div class="col-xs-4 cssStyle"id="pytanie1" > #1 </div>
-						<div class="col-xs-4 col-xs-offset-4 cssStyle2" id="odpowiedz5">#5 </div>
+						<div class="col-xs-4 drag-and-drop-pytanie-style"id="pytanie1" > #1 </div>
+						<div class="col-xs-4 col-xs-offset-4 drag-and-drop-odpowiedz-style" id="odpowiedz5">#5 </div>
 					</div>
 					
 					<div class="col-xs-12 no_padding pytanieIodpowiedz">
-						<div class="col-xs-4 cssStyle"id="pytanie2" > #2 </div>
-						<div class="col-xs-4 col-xs-offset-4 cssStyle2" id="odpowiedz4">#4 </div>
+						<div class="col-xs-4 drag-and-drop-pytanie-style"id="pytanie2" > #2 </div>
+						<div class="col-xs-4 col-xs-offset-4 drag-and-drop-odpowiedz-style" id="odpowiedz4">#4 </div>
 					</div>
 					
 					
 					<div class="col-xs-12 no_padding pytanieIodpowiedz">
-						<div class="col-xs-4 cssStyle"id="pytanie3" > #3 </div>
-						<div class="col-xs-4 col-xs-offset-4 cssStyle2" id="odpowiedz3">#3 </div>
+						<div class="col-xs-4 drag-and-drop-pytanie-style"id="pytanie3" > #3 </div>
+						<div class="col-xs-4 col-xs-offset-4 drag-and-drop-odpowiedz-style" id="odpowiedz3">#3 </div>
 					</div>
 					
 					<div class="col-xs-12 no_padding pytanieIodpowiedz">
-						<div class="col-xs-4 cssStyle"id="pytanie4" > #4 </div>
-						<div class="col-xs-4 col-xs-offset-4 cssStyle2" id="odpowiedz2">#2 </div>
+						<div class="col-xs-4 drag-and-drop-pytanie-style"id="pytanie4" > #4 </div>
+						<div class="col-xs-4 col-xs-offset-4 drag-and-drop-odpowiedz-style" id="odpowiedz2">#2 </div>
 					</div>
 					
 					<div class="col-xs-12 no_padding pytanieIodpowiedz">
-						<div class="col-xs-4 cssStyle"id="pytanie5" > #5 </div>
-						<div class="col-xs-4 col-xs-offset-4 cssStyle2" id="odpowiedz1">#1 </div>
+						<div class="col-xs-4 drag-and-drop-pytanie-style"id="pytanie5" > #5 </div>
+						<div class="col-xs-4 col-xs-offset-4 drag-and-drop-odpowiedz-style" id="odpowiedz1">#1 </div>
 					</div>
 	
 	
@@ -182,7 +181,10 @@ function chceckOdpowiedz5( event, ui ) {
 			
 			
 		</div>
-		
+			<!--MENU TYLKO DLA NAJMNIEJSZYCH ROZDZIELCZOSCI-->
+		<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+			<div ng-include="'menu.html'"></div>
+		</div>
 		
 		
 	</body>
