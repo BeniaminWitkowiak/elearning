@@ -25,7 +25,25 @@
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="favicon.ico">
 		
-		
+		<style>
+      .myIframe {
+            position: relative;
+            padding-bottom: 65.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: auto; 
+            -webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY    
+            border: solid black 1px;
+        } 
+        .myIframe iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+      
+        </style>
 	</head>
 	
 	
@@ -39,13 +57,15 @@
 		<div class="col-xs-8 col-xs-offset-1" >
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
-					<span class="apexnew-medium rozmiar36 responsiveText">Tworzenie materiałów e-learningowych {{geogebra_width}}</span>
+					<span class="apexnew-medium rozmiar36 responsiveText">Tworzenie materiałów e-learningowych</span>
 				</div>
 			</div>
-			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
-			    <div id="geogebra_div"class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:3px solid red; margin-top:80px;">
-                    <iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/2203759/width/1000/height/1000/border/888888/rc/true/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/true/at/auto" width="{{geogebra_width}}px" height="{{geogebra_height}}px" style="border:0px;width: auto;"> </iframe>
-			    </div>
+			    <div id="geogebra_div"class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <div class='myIframe'>
+                        <!--TUTAJ WSTWIAMY IFRAME Z GEOGEBRA-->
+                        <!--Szerokosc i wysokosc mozna dostosowac wedle uznania, proponuje 600 x 500-->
+                        <iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/2203759/width/800/height/500/border/888888/rc/true/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/true/at/auto" style="border:1px;"> </iframe>
+                    </div>
 							    
                 <div class="col-xs-12 col-sm-6" style="border:0px solid blue">
 					<a ng-click="check()" href="#"><div class="button text-center apexnew-medium">Back</div></a>
@@ -62,35 +82,6 @@
         <script>
             var app = angular.module('app', []);
             app.controller('geogebra', ['$scope', '$window', function ($scope, $window) {
-                $scope.w = angular.element($window);
-                $scope.myEl = angular.element(document.getElementById("geogebra_div"));
-                //$scope.geogebra_width = $scope.myEl.width();
-                //$scope.geogebra_height = $scope.myEl.width();
-                $scope.geogebra_width = 600;
-                $scope.geogebra_height = 600;
-                $scope.check = function () {
-                    //$scope.geogebra_width = $scope.myEl.width() + 50;
-                    //$scope.geogebra_height = $scope.myEl.width() + 50;
-                    $scope.geogebra_width += 50;
-                    $scope.geogebra_height += 50;
-                };
-
-                $scope.w.bind('resize1', function () {
-                    //$scope.check();
-                    $scope.geogebra_width = 2 * $scope.myEl.width();
-                    $scope.geogebra_height = 2 * $scope.myEl.width();
-                    console.log($scope.geogebra_width + " " + $scope.geogebra_height);
-                });
-                
-                $(document).ready(resizeGeogebra);
-                $(window).resize(resizeGeogebra);
-                
-                function resizeGeogebra() {
-                    console.log($scope.myEl.width());
-                    $scope.geogebra_width = 2 * $scope.myEl.width();
-                    $scope.geogebra_height = 2 * $scope.myEl.width();
-                };
-
             } ]);
         </script>
 	</body>

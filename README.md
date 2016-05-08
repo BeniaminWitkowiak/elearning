@@ -12,3 +12,5 @@
 2. Multiple chhoice task i one choice task
 
     Należy uzupełnić jedynie wyznaczone miejsca w skrypcie, jeśli nie chcecie żadnych podpowiedzi, wystarczy wpisać `podpowiedzi: []`
+
+3. Chcąc wstawić geogebrę wybierzcie opcję z wstawieniem taga iframe. Proponowane wymiary to 
