@@ -296,12 +296,12 @@ a:hover{
 
 @media (min-width:100px) and (max-width: 499px) {
 	.responsiveText {
-		font-size: 100%;
+		font-size: 1em;
 		}
 	}
 @media (min-width:500px) and (max-width: 610px) {
 	.responsiveText {
-		font-size: 200%;
+		font-size: 2em;
 		}
 	}
 
