@@ -26,61 +26,42 @@
 		<link rel="shortcut icon" href="favicon.ico">
 		
 		<style>
-      .myIframe {
-            position: relative;
-            padding-bottom: 65.25%;
-            padding-top: 30px;
-            height: 0;
-            overflow: auto; 
-            -webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY    
-            border: solid black 1px;
-        } 
-        .myIframe iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-      
+          .myIframe {
+                position: relative;
+                padding-bottom: 65.25%;
+                padding-top: 30px;
+                height: 0;
+                overflow: auto; 
+                -webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY    
+                border: solid black 1px;
+            } 
+            .myIframe iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
         </style>
 	</head>
 	
 	
 	
 	<body ng-app="app" ng-controller="geogebra">
-	
-			<!--MENU DLA WSZYSTKICH ROZCZIELCZOSCI OPROCZ NAJMNIEJSZYCH (dla najmniejszych ponizej)-->
-		<div class="col-sm-2 hidden-xs">
-			<div ng-include="'menu.html'"></div>
-		</div>
-		<div class="col-xs-12 col-sm-8 col-sm-offset-1" >
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1" >
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
 					<span class="apexnew-medium rozmiar36 responsiveText">Tworzenie materiałów e-learningowych</span>
 				</div>
 			</div>
-			    <div id="geogebra_div"class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <div class='myIframe'>
-                        <!--TUTAJ WSTWIAMY IFRAME Z GEOGEBRA-->
-                        <!--Szerokosc i wysokosc mozna dostosowac wedle uznania, proponuje 600 x 500-->
-                        <iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/2203759/width/800/height/500/border/888888/rc/true/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/true/at/auto" style="border:1px;"> </iframe>
-                    </div>
-							    
-                <div class="col-xs-12 col-sm-6" style="border:0px solid blue">
-					<a ng-click="check()" href="#"><div class="button text-center apexnew-medium">Back</div></a>
-				</div>
-			    <div class="col-xs-12 black_font apexnew-light rozmiar14 text-left" style="margin-top:15px; padding-left:24px">
-				    <!-- *pola obowiązkowe-->
-			    </div>
-			
+			<div class="col-xs-12 col-sm-12" style="border:0px solid red;">
+                <div class='myIframe'>
+                    <!--TUTAJ WSTWIAMY IFRAME Z GEOGEBRA-->
+                    <!--Szerokosc i wysokosc mozna dostosowac wedle uznania, proponuje 1600 x 1000-->
+                    <iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/2203759/width/1600/height/1000/border/888888/rc/true/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/true/at/auto" style="border:1px;"> </iframe>
+                </div>
 		    </div>
-    </div>
-		<!--MENU TYLKO DLA NAJMNIEJSZYCH ROZDZIELCZOSCI-->
-		<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-			<div ng-include="'menu.html'"></div>
-		</div>
-		
+        </div>
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 		<script src='../js/bootstrap.min.js'></script>
         <script>

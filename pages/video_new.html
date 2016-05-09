@@ -27,7 +27,25 @@
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="favicon.ico">
-		
+				
+		<style>
+          .myIframe {
+                position: relative;
+                padding-bottom: 65.25%;
+                padding-top: 30px;
+                height: 0;
+                overflow: auto; 
+                -webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY    
+                border: solid black 1px;
+            } 
+            .myIframe iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
 		
 	</head>
 	
@@ -42,34 +60,22 @@
 				<span style="position:absolute; top:50%; transform:translateY(-50%);">YOUR ANSWER IS CORRECT !!</span>
 			</div>
 		</div>
-		<!--MENU DLA WSZYSTKICH ROZCZIELCZOSCI OPROCZ NAJMNIEJSZYCH (dla najmniejszych ponizej)-->
-		<div class="col-sm-2 hidden-xs">
-			<div ng-include="'menu.html'"></div>
-		</div>
-		<div class="col-xs-12 col-sm-8 col-sm-offset-1">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
 					<span class="apexnew-medium rozmiar36">Tworzenie materiałów e-learningowych</span>
 				</div>
 			</div>
-			<div class="col-xs-10 col-xs-offset-1" style="border:0px solid red; margin-top:30px;">
-		
+			<div class="col-xs-12" style="border:0px solid red; margin-top:30px;">
 				<!-- https://www.youtube.com/watch?v=maB9siE968k -->
 				<!-- --- -- --- -- ZAMIENIC NA -- --- -- --- -->
 				<!-- https://www.youtube.com/embed/maB9siE968k -->
-				
-				<iframe width="100%" height="315" style="border:0px solid blue;" src="https://www.youtube.com/embed/tFIbVqHOOIU">
-				</iframe>
-		
+                <div class='myIframe'>
+			        <iframe width="100%" height="100%" style="border:0px solid blue;" 
+                        src="https://www.youtube.com/embed/tFIbVqHOOIU">
+                    </iframe>
+		        </div>
 			</div>
-			
-
-				<!--MENU TYLKO DLA NAJMNIEJSZYCH ROZDZIELCZOSCI-->
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-				<div ng-include="'menu.html'"></div>
-			</div>
-			
-			
 		</div>
 		
 		
