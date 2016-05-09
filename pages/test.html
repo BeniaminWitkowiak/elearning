@@ -31,7 +31,29 @@
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="favicon.ico">
-		
+		<style>
+          .responsive-iframe {
+                position: relative;
+                padding-bottom: 65.25%;
+                padding-top: 30px;
+                height: 0;
+                overflow: auto; 
+                -webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY    
+                border: solid black 1px;
+            } 
+            .responsive-iframe iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+            }
+            .container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
 		
 	</head>
 	
@@ -57,26 +79,35 @@
 				    </div>
 			    </div>
 		    </div>
-			<div ng-repeat="zadanie in zadania">        
-			    <div class="col-xs-11 col-xs-offset-1 apexnew-light text-left rozmiar14 no_padding">
-                    <h2>Zadanie nr {{$index + 1}}</h2>
-				    <p>{{zadanie.tresc}}</p>
-				    <form role="form">
-					    <label ng-repeat="odp in zadanie.odpowiedzi" class="radio">
-						    <input type="radio" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
-					    </label>
-				    </form>
-                    <!--Część odpowiedzialna za wyświetlanie podpowiedzi-->
-                    <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
-                        <h3 ng-show="podp.pokaz || $first" ng-click="showHideHint($index)">{{podp.info}}</h3> <!--Tuaj wyswietlamy parametr info każdej podpowiedi-->
-					    <p ng-show="podp.pokazTresc">{{podp.tresc}}</p>  <!--Tuaj wyswietlamy treść każdej podpowiedi-->
-				    </div>
-			        <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:20px;margin-bottom: 20px">
-				        <div class="col-xs-12 col-sm-6 col-sm-offset-3 margin-for-xs" style="border:0px solid blue">
-					        <a ng-click="check($index)"><div class="button check_button text-center apexnew-medium">Sprawdz</div></a>
-				        </div>	
-			        </div>
-                </div>
+			<div ng-repeat="zadanie in zadania">
+                <div class="col-xs-12" style="border:0px solid red;">
+			        <div class="col-xs-5 col-xs-offset-1 apexnew-light text-left rozmiar14 no_padding">
+                        <h2>Zadanie nr {{$index + 1}}</h2>
+				        <p>{{zadanie.tresc}}</p>
+				        <form role="form">
+					        <label ng-repeat="odp in zadanie.odpowiedzi" class="radio">
+						        <input type="radio" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
+					        </label>
+				        </form>
+                        <!--Część odpowiedzialna za wyświetlanie podpowiedzi-->
+                        <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
+                            <h3 ng-show="podp.pokaz || $first" ng-click="showHideHint($index)">{{podp.info}}</h3> <!--Tuaj wyswietlamy parametr info każdej podpowiedi-->
+					        <p ng-show="podp.pokazTresc">{{podp.tresc}}</p>  <!--Tuaj wyswietlamy treść każdej podpowiedi-->
+				        </div>
+			            <div class="col-xs-12 col-sm-8" style="border:0px solid red; margin-top:20px;margin-bottom: 20px">
+				            <div class="margin-for-xs" style="border:0px solid blue">
+					            <a ng-click="check($index)"><div class="button check_button text-center apexnew-medium">Sprawdz</div></a>
+				            </div>	
+			            </div>
+                    </div>
+                    <div class="col-xs-5" style="top: 50%">
+                        <div class='responsive-iframe'>
+			                <iframe  width="100%" height="100%" 
+                                src="https://www.youtube.com/embed/tFIbVqHOOIU" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+                            </iframe>
+		                </div>
+                    </div>
+                </div>        
 		    </div>
     </div>
 
@@ -113,18 +144,18 @@
                         podpowiedzi: []
                     },
                     {
-                        tresc: "Pierwiastkiem równania $x^2 - 2x + 4 = 0$ jest",
+                        tresc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt aboris nisivoluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. $x^2 - 2x + 4 = 0$ jest",
                         wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 2", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
                         wiadomoscBlad: "Zaznaczyles zla odpowiedz 3", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
                         //mozliwe odpowiedzi
                         odpowiedzi: [
                             {
-                                tresc: "Poprawna odpowiedz",
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
                                 poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
                                 zaznaczona: false // tutaj dajemy zawsze na false
                             },
                             {
-                                tresc: "Błędna odpowiedz1",
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
                                 poprawna: false,
                                 zaznaczona: false
                             },

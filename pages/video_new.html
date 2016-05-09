@@ -26,8 +26,7 @@
 		<!-- FAVICON -->
 		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-		<link rel="shortcut icon" href="favicon.ico">
-				
+		<link rel="shortcut icon" href="favicon.ico">	
 		<style>
           .myIframe {
                 position: relative;
@@ -46,7 +45,6 @@
                 height: 100%;
             }
         </style>
-		
 	</head>
 	
 	
@@ -70,8 +68,9 @@
 				<!-- https://www.youtube.com/watch?v=maB9siE968k -->
 				<!-- --- -- --- -- ZAMIENIC NA -- --- -- --- -->
 				<!-- https://www.youtube.com/embed/maB9siE968k -->
-                <div class='myIframe'>
-			        <iframe width="100%" height="100%" style="border:0px solid blue;" 
+                <!--Zajmuje całą szerokość i wysokość okalającego znacznika - wartości te można zmienić na górze strony w `.myIframe iframe` -->
+                <div  class='myIframe'>
+			        <iframe  webkitallowfullscreen mozallowfullscreen allowfullscreen
                         src="https://www.youtube.com/embed/tFIbVqHOOIU">
                     </iframe>
 		        </div>
