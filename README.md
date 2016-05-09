@@ -1,4 +1,7 @@
 # elearning-
+WSKASÓWKI:
+1. Wstawiając formuły matematyczne należy używać podwójnego ukośnika : `\\`.
+2. Żeby formuła matematyczna nie `łamała` tekstu należy wstawić ją w pojedyńczych dolarach:  $x^2 - 2x + 4 = 0$
 
 1. Otwierajcie w firefoxie jeśli chcecie mieć widoczne menu ;)
 	Jeśli chcecie testować lokalnie na chromie to macie dwie opcje:
