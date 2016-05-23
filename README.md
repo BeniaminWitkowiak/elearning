@@ -17,3 +17,11 @@ WSKASÓWKI:
     Należy uzupełnić jedynie wyznaczone miejsca w skrypcie, jeśli nie chcecie żadnych podpowiedzi, wystarczy wpisać `podpowiedzi: []`
 
 3. Chcąc wstawić geogebrę wybierzcie opcję z wstawieniem taga iframe. Proponowane wymiary to 
+
+
+4. Wstawianie video z YouTube:
+	Każdy link z YouTube należy zamienić usuwając całą frazę "watch?v=" i zamieniając ją na "embed/" tak jak w przykładzie poniżej: 
+		Oryginał skopiowany z YouTube:
+			https://www.youtube.com/watch?v=maB9siE968k
+		Zmieniony link wg instrukcji
+			https://www.youtube.com/embed/maB9siE968k
