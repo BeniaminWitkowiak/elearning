@@ -34,19 +34,16 @@
 		<style>
           .responsive-iframe {
                 position: relative;
-                padding-bottom: 65.25%;
+                padding-bottom: 56.25%;
                 padding-top: 30px;
                 height: 0;
-                overflow: auto; 
-                -webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY    
-                border: solid black 1px;
             } 
             .responsive-iframe iframe {
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 90%;
+                width: 85%;
+                height: 70%;
             }
             .container {
                 display: flex;
@@ -61,7 +58,7 @@
 	
 	<body ng-app="app" ng-controller="task" style="position:relative">
 	            <div id="grey_background"class="grey_background">
-			    <div id="correct_message" class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
+			    <div id="correct_message" class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="margin-top:10vh;">
 				    <div class="col-xs-12" style="border:0px solid white;height:100%;">
 				    <span style="">{{zadanie.wiadomoscPoprawna}}</span>
 				    </div>
@@ -80,9 +77,9 @@
 			</div>
             <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
 
-			<div ng-repeat="zadanie in zadania">
+			<div ng-repeat="zadanie in zadania" style="margin-top:40px;">
                 <div class="col-xs-12" style="border:0px solid red; position:relative;">
-			        <div class="col-xs-12 col-sm-5 col-sm-offset-1 apexnew-light text-left rozmiar14 no_padding">
+			        <div class="col-xs-12 col-sm-5 col-sm-offset-1 apexnew-light text-left rozmiar14 no_padding"  style="border:0px solid black; position:relative;">
                         <h2>Zadanie nr {{$index + 1}}</h2>
 				        <p>{{zadanie.tresc}}</p>
 				        <form role="form">
@@ -101,10 +98,10 @@
 				            </div>	
 			            </div>
                     </div>
-                    <div class="col-xs-12 col-sm-5 spowrotemRelative" style="border:0px solid blue; position:absolute; top:50%; right:0;">
-                        <div class="spowrotemRelative2" style="transform:translateY(-50%);">
+                    <div class="col-xs-12 col-sm-5 spowrotemRelative" style="border:0px solid blue; position:absolute; top:10%; right:0;">
+                        <div class="spowrotemRelative2 responsive-iframe" style="transform:translateY(00%);">
 			                <iframe  width="100%" height="100%" 
-                                src="https://www.youtube.com/embed/tFIbVqHOOIU" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+                                ng-src="{{zadanie.video.link}}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
                             </iframe>
 		                </div>
                     </div>
@@ -117,7 +114,7 @@
         <script>
             //skrypt dla zadan z jedna poprawna odpowiedzia
             var app = angular.module('app', []);
-            app.controller('task', function ($scope) {
+            app.controller('task', function ($scope, $sce) {
                 //Tutaj podajemy tresc zadania:
                 $scope.zadania = [
                     {
@@ -125,6 +122,10 @@
                         wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 1", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
                         wiadomoscBlad: "Zaznaczyles zla odpowiedz 1", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
                         //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            link:  $sce.trustAsResourceUrl('https://www.youtube.com/embed/tFIbVqHOOIU')
+                        },
                         odpowiedzi: [
                             {
                                 tresc: "Poprawna odpowiedz",
@@ -149,6 +150,67 @@
                         wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 2", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
                         wiadomoscBlad: "Zaznaczyles zla odpowiedz 3", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
                         //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            link: $sce.trustAsResourceUrl('https://www.youtube.com/embed/tFIbVqHOOIU')
+                        },
+                        odpowiedzi: [
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt aboris nisivoluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. $x^2 - 2x + 4 = 0$ jest",
+                        wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 2", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla odpowiedz 3", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            link: $sce.trustAsResourceUrl('https://www.youtube.com/embed/tFIbVqHOOIU')
+                        },
+                        odpowiedzi: [
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt aboris nisivoluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. $x^2 - 2x + 4 = 0$ jest",
+                        wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 2", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla odpowiedz 3", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            //tutaj wpisujemy link
+                            link: $sce.trustAsResourceUrl('https://www.youtube.com/embed/7TOoSX_YE0U')
+                        },
                         odpowiedzi: [
                             {
                                 tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
@@ -169,9 +231,7 @@
                         podpowiedzi: []
                     }
                 ];
-                
                 $scope.zadanie = $scope.zadania[0];
-                //Tutaj raczej nie nalezy nic zmieniac
                 $scope.check = function (index) {
                     $scope.zadanie = $scope.zadania[index];
                     var correct = true;
