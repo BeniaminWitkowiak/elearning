@@ -165,6 +165,7 @@
 
                 $scope.showHideHint = function (index) {
                     $scope.zadanie.podpowiedzi[index].pokazTresc = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+                    $scope.zadanie.podpowiedzi[index].pokaz = !$scope.zadanie.podpowiedzi[index].pokazTresc;
 
                     for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
                         console.log("for z i= " + i);
@@ -174,6 +175,14 @@
                         } else {
                             $scope.zadanie.podpowiedzi[i].pokaz = false;
                         }
+                    }
+                    if ($scope.zadanie.podpowiedzi.length > 1) {
+                        if (index == 0 && $scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = true;
+                        } else if (index == 0 && !$scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = false;
+                        }
+                        
                     }
                 };
             });
