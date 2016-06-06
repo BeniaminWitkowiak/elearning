@@ -33,12 +33,6 @@
 	</head>
 	
 	<body ng-app="app" ng-controller="task" ng-keypress="keyPressed()">
-	
-			<!--MENU DLA WSZYSTKICH ROZCZIELCZOSCI OPROCZ NAJMNIEJSZYCH (dla najmniejszych ponizej)-->
-		<div class="col-sm-2 hidden-xs">
-			<div ng-include="'menu.html'"></div>
-		</div>
-
         <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna itd-->
         <div class="grey_background">
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
@@ -46,8 +40,6 @@
 				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
 				</div>
 			</div>
-			
-			
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 some_right_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;">
 				<span style="">{{zadanie.wiadomoscNieWszystkieDobre}}</span>
@@ -64,13 +56,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-8 col-sm-offset-1" >
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1" >
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
 					<span class="apexnew-medium rozmiar36 responsiveText">Tworzenie materiałów e-learningowych</span>
 				</div>
 			</div>
-			<div class="container col-xs-12 apexnew-light text-left rozmiar14 no_padding">
+			<div class="col-xs-12 apexnew-light text-left rozmiar14 no_padding">
                         <!--Każdy znacznik input ma swoje unikalne id, które wykorzystywane jest do zaznaczania przy pomocy klawiatury, standardowo mamy 3-4 odpowiedzi, każda ma id postaci odp<numer-odpowiedzi>-->
 				<h2>Zadanie 1</h2>
 				<p>{{zadanie.tresc}}</p>
@@ -98,13 +90,6 @@
 			
 		    </div>
 		</div>
-		
-			<!--MENU TYLKO DLA NAJMNIEJSZYCH ROZDZIELCZOSCI-->
-		<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-			<div ng-include="'menu.html'"></div>
-		</div>
-		
-		
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 		<script src='../js/bootstrap.min.js'></script>
         <script>
@@ -200,15 +185,15 @@
                     //same dobre i nie ma żadnej złej
                     if (allRightCheck && !someWrongCheck) {
                         $('.correct_message').css("display", "block");
-                    $('.grey_background').css("display", "block");
+                        $('.grey_background').css("display", "block");
                     } else if (someRightCheck && someWrongCheck) {
                         // są zaznaczone złe i dobre
                         $('.wrong_and_right_message').css("display", "block");
-                    $('.grey_background').css("display", "block");
+                        $('.grey_background').css("display", "block");
                     } else if (someRightCheck && !someWrongCheck && !allRightCheck) {
                         // nie wszystkie dobre są zaznaczone
                         $('.some_right_message').css("display", "block");
-                    $('.grey_background').css("display", "block");
+                        $('.grey_background').css("display", "block");
                     } else if (someWrongCheck && !someRightCheck) {
                         //są zaznaczone same złe odpowiedzi
                         $('.incorrect_message').css("display", "block");
@@ -220,6 +205,7 @@
 
                 $scope.showHideHint = function (index) {
                     $scope.zadanie.podpowiedzi[index].pokazTresc = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+                    $scope.zadanie.podpowiedzi[index].pokaz = !$scope.zadanie.podpowiedzi[index].pokazTresc;
 
                     for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
                         console.log("for z i= " + i);
@@ -229,6 +215,14 @@
                         } else {
                             $scope.zadanie.podpowiedzi[i].pokaz = false;
                         }
+                    }
+                    if ($scope.zadanie.podpowiedzi.length > 1) {
+                        if (index == 0 && $scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = true;
+                        } else if (index == 0 && !$scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = false;
+                        }
+                        
                     }
                 }
                 //obsługa klawiatury
