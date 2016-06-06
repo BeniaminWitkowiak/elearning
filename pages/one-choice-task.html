@@ -34,30 +34,20 @@
 		
 		
 	</head>
-	
-	
-	
 	<body ng-app="app" ng-controller="task">
-	
-			<!--MENU DLA WSZYSTKICH ROZCZIELCZOSCI OPROCZ NAJMNIEJSZYCH (dla najmniejszych ponizej)-->
-		<div class="col-sm-2 hidden-xs">
-			<div ng-include="'menu.html'"></div>
-		</div>
-
         <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
         <div class="grey_background">
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;height:100%;">
-				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
+				    <span style="">{{zadanie.wiadomoscPoprawna}}</span>
 				</div>
 			</div>
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;">
-				<span style="">{{zadanie.wiadomoscBlad}}</span>
+				    <span style="">{{zadanie.wiadomoscBlad}}</span>
 				</div>
 			</div>
 		</div>
-
 		<div class="col-xs-12 col-sm-8 col-sm-offset-1" >
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
@@ -88,14 +78,6 @@
 			    </div>
 		    </div>
     </div>
-		
-			<!--MENU TYLKO DLA NAJMNIEJSZYCH ROZDZIELCZOSCI-->
-		<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-			<div ng-include="'menu.html'"></div>
-		</div>
-		
-		
-		
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 		<script src='../js/bootstrap.min.js'></script>
         <script>
