@@ -56,19 +56,19 @@
 	
 	
 	
-	<body ng-app="app" ng-controller="task" style="">
-	            <div id="grey_background"class="grey_background">
-			    <div id="correct_message" class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="margin-top:10vh;">
-				    <div class="col-xs-12" style="border:0px solid white;height:100%;">
-				    <span style="">{{zadanie.wiadomoscPoprawna}}</span>
-				    </div>
-			    </div>
-			    <div id="incorrect_message{{$index}}"class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="border:0px solid red;">
-				    <div class="col-xs-12" style="border:0px solid white;">
-				    <span style="">{{zadanie.wiadomoscBlad}}</span>
-				    </div>
-			    </div>
-		    </div>
+	<body ng-app="app" ng-controller="task" style="position:relative; float:left">
+		<div id="grey_background"class="grey_background">
+			<div id="correct_message" class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="position:fixed">
+				<div class="col-xs-12" style="border:0px solid white;height:100%;">
+				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
+				</div>
+			</div>
+			<div id="incorrect_message{{$index}}"class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="position:fixed">
+				<div class="col-xs-12" style="border:0px solid white;">
+				<span style="">{{zadanie.wiadomoscBlad}}</span>
+				</div>
+			</div>
+		</div>
 		<div class="col-xs-10 col-xs-offset-1" style=" border:0px solid red;">
 			<div class="container margin-top-30 bg-info col-xs-12">
 				<div class="text-center">
