@@ -78,12 +78,12 @@
 				</div>
 
 			    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
-				    <div class="col-xs-12 col-sm-6" style="border:0px solid blue">
-					    <a href="#"><div class="button text-center apexnew-medium">Back</div></a>
+				    <div ng-show="{{przyciskWstecz.pokaz}}"class="col-xs-12 col-sm-6" style="border:0px solid blue">
+					    <a href="{{przyciskWstecz.link}}"><div class="button text-center apexnew-medium">Wstecz</div></a>
 				    </div>
 				
 				    <div class="col-xs-12 col-sm-6 margin-for-xs" style="border:0px solid blue">
-					    <a ng-click="check()"><div class="button check_button text-center apexnew-medium">Check</div></a>
+					    <a ng-click="check()"><div class="button check_button text-center apexnew-medium">Sprawdź</div></a>
 				    </div>	
 			    </div>
 		
@@ -94,10 +94,18 @@
 		<script src='../js/bootstrap.min.js'></script>
         <script>
             var app = angular.module('app', []);
-            app.controller('task', function ($scope) {
+            app.controller('task', function ($scope, $sce) {
+                //tutaj wypelniasz dane do buttona wstecz
+                $scope.przyciskWstecz = {
+                    pokaz: true, //true jesli ma byc widoczny, false w przeciwnym razie
+                    link: $sce.trustAsResourceUrl('#') // w miejsce # wpisac link to strony, ktora ma sie pojawic po kliknieciu w przycisk
+                };
+
                 //Tutaj wypelniasz resc zadania
                 $scope.zadanie = {
+
                     tresc: "Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest",
+
                     wiadomoscPoprawna: "Zaznaczyles wszystkie dobre odpowiedzi, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
                     wiadomoscBlad: "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
                     wiadomoscDobreIZle: "Zaznaczono dobre i zle odpowiedzi", // wiadomosc do wyswietlenia jak mamy dobra i zla wiadomosc
