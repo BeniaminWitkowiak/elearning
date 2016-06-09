@@ -35,22 +35,22 @@
 	<body ng-app="app" ng-controller="task" ng-keypress="keyPressed()">
         <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna itd-->
         <div class="grey_background">
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding"  style="position: fixed">
 				<div class="col-xs-12" style="border:0px solid white;height:100%;">
 				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
 				</div>
 			</div>
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 some_right_message no-padding" style="border:0px solid red;">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 some_right_message no-padding"  style="position: fixed">
 				<div class="col-xs-12" style="border:0px solid white;">
 				<span style="">{{zadanie.wiadomoscNieWszystkieDobre}}</span>
 				</div>
 			</div>
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="border:0px solid red;">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding"  style="position: fixed">
 				<div class="col-xs-12" style="border:0px solid white;">
 				<span style="">{{zadanie.wiadomoscBlad}}</span>
 				</div>
 			</div>
-			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 wrong_and_right_message no-padding" style="border:0px solid red;">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 wrong_and_right_message no-padding"  style="position: fixed">
 				<div class="col-xs-12" style="border:0px solid white;">
 				<span style="">{{zadanie.wiadomoscDobreIZle}}</span>
 				</div>

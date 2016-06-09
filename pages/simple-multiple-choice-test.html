@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Tworzenie materiałóww e-learningowych
+		</title>
+		
+		<meta charset="utf-8">	
+		
+		<!-- STYLES -->	
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/style_checkbox_green.css" rel="stylesheet">
+		
+		<!-- SCRIPTS -->
+		<script src="../js/jquery-1.11.3.js"></script>
+		<script src="../js/my_javascript.js"></script>
+		<script src="../js/angular.js"></script>	
+        <!-- Mathjax obsługa-->
+		<script type="text/javascript"
+			src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript"
+			src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		
+		<!-- FAVICON -->
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<style>
+          .responsive-iframe {
+                position: relative;
+                padding-bottom: 56.25%;
+                padding-top: 30px;
+                height: 0;
+            } 
+            .responsive-iframe iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 85%;
+                height: 70%;
+            }
+            .container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+		
+	</head>
+	
+	
+	
+	<body ng-app="app" ng-controller="task" style="position:relative; float:left">
+        <div class="grey_background">
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="position: fixed">
+				<div class="col-xs-12" style="border:0px solid white;height:100%;">
+				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
+				</div>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 some_right_message no-padding" style="position: fixed">
+				<div class="col-xs-12" style="border:0px solid white;">
+				<span style="">{{zadanie.wiadomoscNieWszystkieDobre}}</span>
+				</div>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="position: fixed">
+				<div class="col-xs-12" style="border:0px solid white;">
+				<span style="">{{zadanie.wiadomoscBlad}}</span>
+				</div>
+			</div>
+			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 wrong_and_right_message no-padding" style="position: fixed">
+				<div class="col-xs-12" style="border:0px solid white;">
+				<span style="">{{zadanie.wiadomoscDobreIZle}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-10 col-xs-offset-1" style=" border:0px solid red;">
+			<div class="container margin-top-30 bg-info col-xs-12">
+				<div class="text-center">
+					<span class="apexnew-medium rozmiar36 responsiveText">Tworzenie materiałów e-learningowych</span>
+				</div>
+			</div>
+            <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
+
+			<div ng-repeat="zadanie in zadania" style="margin-top:40px;">
+                <div class="col-xs-12" style="border:0px solid red; position:relative;">
+			        <div class="col-xs-12 col-sm-10 col-sm-offset-1 apexnew-light text-left rozmiar14 no_padding"  style="border:0px solid black; position:relative;">
+                        <h2>Zadanie nr {{$index + 1}}</h2>
+				        <p>{{zadanie.tresc}}</p>
+				        <form role="form">
+					        <label ng-repeat="odp in zadanie.odpowiedzi" class="radio">
+						        <input type="checkbox" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
+					        </label>
+				        </form>
+                        <!--Część odpowiedzialna za wyświetlanie podpowiedzi-->
+                        <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
+                            <h3 ng-show="podp.pokaz || $first" ng-click="showHideHint($index)">{{podp.info}}</h3> <!--Tuaj wyswietlamy parametr info każdej podpowiedi-->
+					        <p ng-show="podp.pokazTresc">{{podp.tresc}}</p>  <!--Tuaj wyswietlamy treść każdej podpowiedi-->
+				        </div>
+			            <div class="col-xs-12 col-sm-4" style="border:0px solid red; margin-top:20px;margin-bottom: 20px">
+				            <div class="margin-for-xs" style="border:0px solid blue">
+					            <a ng-click="check($index)"><div class="button check_button text-center apexnew-medium">Sprawdz</div></a>
+				            </div>	
+			            </div>
+                    </div>
+                </div>        
+		    </div>
+        </div>
+
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script src='../js/bootstrap.min.js'></script>
+        <script>
+            //skrypt dla zadan z jedna poprawna odpowiedzia
+            var app = angular.module('app', []);
+            app.controller('task', function ($scope, $sce) {
+                //Tutaj podajemy tresc zadania:
+                $scope.zadania = [
+                    //Wpisując mathjaxowe formuły, jeśli użyjesz podwójnego dolara cała formuła będzie odłączona od tekstu i wyświetlona w osobnej linijce, przy jednym dolarze tekst nie zostaje złamany
+                    {
+                        tresc: "Pierwiastkiem równania $x^2 - 2x + 4 = 0$ jest",
+
+                        wiadomoscPoprawna: "Zaznaczyles wszystkie dobre odpowiedzi, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        wiadomoscDobreIZle: "Zaznaczono dobre i zle odpowiedzi", // wiadomosc do wyswietlenia jak mamy dobra i zla wiadomosc
+                        wiadomoscNieWszystkieDobre: "Nie zaznaczono wszystkich prawidlowych odpowiedzi", // wiadomosc wyswietlona jak nie wszystke dore odpowiedzi zostaly zaznaczone-
+                        //mozliwe odpowiedzi
+                        odpowiedzi: [
+                            {
+                                tresc: "Poprawna odpowiedz 1",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 1",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 2",
+                                poprawna: true,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 3",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 3",
+                                poprawna: true,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Pierwiastkiem równania $x^2 - 2x + 4 = 0$ jest",
+
+                        wiadomoscPoprawna: "Zaznaczyles wszystkie dobre odpowiedzi, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        wiadomoscDobreIZle: "Zaznaczono dobre i zle odpowiedzi", // wiadomosc do wyswietlenia jak mamy dobra i zla wiadomosc
+                        wiadomoscNieWszystkieDobre: "Nie zaznaczono wszystkich prawidlowych odpowiedzi", // wiadomosc wyswietlona jak nie wszystke dore odpowiedzi zostaly zaznaczone-
+                        //mozliwe odpowiedzi
+                        odpowiedzi: [
+                            {
+                                tresc: "Poprawna odpowiedz 1",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 1",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 2",
+                                poprawna: true,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 3",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 3",
+                                poprawna: true,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest",
+
+                        wiadomoscPoprawna: "Zaznaczyles wszystkie dobre odpowiedzi, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        wiadomoscDobreIZle: "Zaznaczono dobre i zle odpowiedzi", // wiadomosc do wyswietlenia jak mamy dobra i zla wiadomosc
+                        wiadomoscNieWszystkieDobre: "Nie zaznaczono wszystkich prawidlowych odpowiedzi", // wiadomosc wyswietlona jak nie wszystke dore odpowiedzi zostaly zaznaczone-
+                        //mozliwe odpowiedzi
+                        odpowiedzi: [
+                            {
+                                tresc: "Poprawna odpowiedz 1",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 1",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 2",
+                                poprawna: true,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 3",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 3",
+                                poprawna: true,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Pierwiastkiem równania $$x^2 - 2x + 4 = 0$$ jest",
+
+                        wiadomoscPoprawna: "Zaznaczyles wszystkie dobre odpowiedzi, brawo", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla wiadomosc", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        wiadomoscDobreIZle: "Zaznaczono dobre i zle odpowiedzi", // wiadomosc do wyswietlenia jak mamy dobra i zla wiadomosc
+                        wiadomoscNieWszystkieDobre: "Nie zaznaczono wszystkich prawidlowych odpowiedzi", // wiadomosc wyswietlona jak nie wszystke dore odpowiedzi zostaly zaznaczone-
+                        //mozliwe odpowiedzi
+                        odpowiedzi: [
+                            {
+                                tresc: "Poprawna odpowiedz 1",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 1",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 2",
+                                poprawna: true,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 3",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Poprawna odpowiedz 3",
+                                poprawna: true,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    }
+                ];
+
+                //tu proponuję nic już nie zmieniać;)
+                $scope.zadanie = $scope.zadania[0];
+                $scope.check = function (index) {
+                    $scope.zadanie = $scope.zadania[index];
+                    //Ustawiamy odpowiednio zmienne, wstawiając w odpowiednie miejsca wszystkie dobre / złe odopwiedzi
+                    var allRightCheck = true; //$scope.right1 && $scope.right2  && $scope.right3;
+                    var someRightCheck = false; //$scope.right1 || $scope.right2  || $scope.right3;
+                    var someWrongCheck = false; //$scope.wrong1 || $scope.wrong2;
+
+                    for (i = 0; i < $scope.zadanie.odpowiedzi.length; i++) {
+                        var odp = $scope.zadanie.odpowiedzi[i];
+                        if (odp.poprawna) {
+                            allRightCheck = allRightCheck && odp.zaznaczona;
+                            someRightCheck = someRightCheck || odp.zaznaczona;
+                        } else {
+                            someWrongCheck = someWrongCheck || odp.zaznaczona;
+                        }
+
+                    }
+
+                    //wyświetlanie wiadomości po wciśnięciu check
+                    //same dobre i nie ma żadnej złej
+                    if (allRightCheck && !someWrongCheck) {
+                        $('.correct_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                    } else if (someRightCheck && someWrongCheck) {
+                        // są zaznaczone złe i dobre
+                        $('.wrong_and_right_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                    } else if (someRightCheck && !someWrongCheck && !allRightCheck) {
+                        // nie wszystkie dobre są zaznaczone
+                        $('.some_right_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                    } else if (someWrongCheck && !someRightCheck) {
+                        //są zaznaczone same złe odpowiedzi
+                        $('.incorrect_message').css("display", "block");
+                        $('.grey_background').css("display", "block");
+                    }
+
+
+                };
+
+                $scope.showHideHint = function (index) {
+                    $scope.zadanie.podpowiedzi[index].pokazTresc = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+                    $scope.zadanie.podpowiedzi[index].pokaz = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+
+                    for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
+                        console.log("for z i= " + i);
+                        $scope.zadanie.podpowiedzi[i].pokazTresc = false;
+                        if (i == (index + 1)) {
+                            $scope.zadanie.podpowiedzi[i].pokaz = !$scope.zadanie.podpowiedzi[i].pokaz;
+                        } else {
+                            $scope.zadanie.podpowiedzi[i].pokaz = false;
+                        }
+                    }
+                    if ($scope.zadanie.podpowiedzi.length > 1) {
+                        if (index == 0 && $scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = true;
+                        } else if (index == 0 && !$scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = false;
+                        }
+                        
+                    }
+                };
+            });
+        </script>
+	</body>
+	
+</html>
