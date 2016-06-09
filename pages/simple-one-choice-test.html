@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Tworzenie materiałóww e-learningowych
+		</title>
+		
+		<meta charset="utf-8">	
+		
+		<!-- STYLES -->	
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../css/bootstrap.css" rel="stylesheet">
+		<link href="../css/style_checkbox_green.css" rel="stylesheet">
+		
+		<!-- SCRIPTS -->
+		<script src="../js/jquery-1.11.3.js"></script>
+		<script src="../js/my_javascript.js"></script>
+		<script src="../js/angular.js"></script>	
+        <!-- Mathjax obsługa-->
+		<script type="text/javascript"
+			src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript"
+			src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		
+		<!-- FAVICON -->
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<style>
+          .responsive-iframe {
+                position: relative;
+                padding-bottom: 56.25%;
+                padding-top: 30px;
+                height: 0;
+            } 
+            .responsive-iframe iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 85%;
+                height: 70%;
+            }
+            .container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+		
+	</head>
+	
+	
+	
+	<body ng-app="app" ng-controller="task" style="position:relative; float:left">
+		<div id="grey_background"class="grey_background">
+			<div id="correct_message" class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="position:fixed">
+				<div class="col-xs-12" style="border:0px solid white;height:100%;">
+				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
+				</div>
+			</div>
+			<div id="incorrect_message{{$index}}"class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="position:fixed">
+				<div class="col-xs-12" style="border:0px solid white;">
+				<span style="">{{zadanie.wiadomoscBlad}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-10 col-xs-offset-1" style=" border:0px solid red;">
+			<div class="container margin-top-30 bg-info col-xs-12">
+				<div class="text-center">
+					<span class="apexnew-medium rozmiar36 responsiveText">Tworzenie materiałów e-learningowych</span>
+				</div>
+			</div>
+            <!-- Tutaj wpisujemy odpowiednie wiadomości, które mają pokazać się gdy odpowiedź jest poprawna / niepoprawna-->
+
+			<div ng-repeat="zadanie in zadania" style="margin-top:40px;">
+                <div class="col-xs-12" style="border:0px solid red; position:relative;">
+			        <div class="col-xs-12 col-sm-10 col-sm-offset-1 apexnew-light text-left rozmiar14 no_padding"  style="border:0px solid black; position:relative;">
+                        <h2>Zadanie nr {{$index + 1}}</h2>
+				        <p>{{zadanie.tresc}}</p>
+				        <form role="form">
+					        <label ng-repeat="odp in zadanie.odpowiedzi" class="radio">
+						        <input type="radio" name="optradio" ng-model="odp.zaznaczona" value="true" required>{{odp.tresc}}
+					        </label>
+				        </form>
+                        <!--Część odpowiedzialna za wyświetlanie podpowiedzi-->
+                        <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
+                            <h3 ng-show="podp.pokaz || $first" ng-click="showHideHint($index)">{{podp.info}}</h3> <!--Tuaj wyswietlamy parametr info każdej podpowiedi-->
+					        <p ng-show="podp.pokazTresc">{{podp.tresc}}</p>  <!--Tuaj wyswietlamy treść każdej podpowiedi-->
+				        </div>
+			            <div class="col-xs-12 col-sm-4" style="border:0px solid red; margin-top:20px;margin-bottom: 20px">
+				            <div class="margin-for-xs" style="border:0px solid blue">
+					            <a ng-click="check($index)"><div class="button check_button text-center apexnew-medium">Sprawdz</div></a>
+				            </div>	
+			            </div>
+                    </div>
+                </div>        
+		    </div>
+    </div>
+
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script src='../js/bootstrap.min.js'></script>
+        <script>
+            //skrypt dla zadan z jedna poprawna odpowiedzia
+            var app = angular.module('app', []);
+            app.controller('task', function ($scope, $sce) {
+                //Tutaj podajemy tresc zadania:
+                $scope.zadania = [
+                    {
+                        tresc: "Pierwiastkiem równania $x^2 - 2x + 4 = 0$ jest",
+                        wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 1", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla odpowiedz 1", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            link:  $sce.trustAsResourceUrl('https://www.youtube.com/embed/tFIbVqHOOIU')
+                        },
+                        odpowiedzi: [
+                            {
+                                tresc: "Poprawna odpowiedz",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz1",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt aboris nisivoluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. $x^2 - 2x + 4 = 0$ jest",
+                        wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 2", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla odpowiedz 3", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            link: $sce.trustAsResourceUrl('https://www.youtube.com/embed/tFIbVqHOOIU')
+                        },
+                        odpowiedzi: [
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt aboris nisivoluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. $x^2 - 2x + 4 = 0$ jest",
+                        wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 2", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla odpowiedz 3", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            link: $sce.trustAsResourceUrl('https://www.youtube.com/embed/tFIbVqHOOIU')
+                        },
+                        odpowiedzi: [
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    },
+                    {
+                        tresc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt aboris nisivoluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. $x^2 - 2x + 4 = 0$ jest",
+                        wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 2", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                        wiadomoscBlad: "Zaznaczyles zla odpowiedz 3", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                        //mozliwe odpowiedzi
+                        video: {
+                            show: true,
+                            //tutaj wpisujemy link
+                            link: $sce.trustAsResourceUrl('https://www.youtube.com/embed/7TOoSX_YE0U')
+                        },
+                        odpowiedzi: [
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
+                                poprawna: true, // true jesli odpowiedz jest poprawna, false w przeciwnym razie
+                                zaznaczona: false // tutaj dajemy zawsze na false
+                            },
+                            {
+                                tresc: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                                poprawna: false,
+                                zaznaczona: false
+                            },
+                            {
+                                tresc: "Błędna odpowiedz 2",
+                                poprawna: false,
+                                zaznaczona: false
+                            }
+                        ],
+                        podpowiedzi: []
+                    }
+                ];
+                $scope.zadanie = $scope.zadania[0];
+                $scope.check = function (index) {
+                    $scope.zadanie = $scope.zadania[index];
+                    var correct = true;
+                    var zadanie = $scope.zadania[index];
+                    //sprawdzanie czy zaznaczona odpowiedz jest poprawna, tj
+                    for (i = 0; i < zadanie.odpowiedzi.length; i++) {
+                        var odp = zadanie.odpowiedzi[i];
+                        if ((odp.poprawna && !odp.zaznaczona) || (!odp.poprawna && odp.zaznaczona)) {
+                            correct = false;
+                        }
+                    }
+                    //wyswietlanie powiadomienia
+                    if (correct) {
+                        $('.grey_background').css("display", "block");
+                        $('.correct_message').css("display", "block");
+                        $scope.task_opt = false;
+                    } else {
+                        $('.grey_background').css("display", "block");
+                        $('.incorrect_message').css("display", "block");
+                    }
+                    //czyszczenie
+                    for (i = 0; i < zadanie.odpowiedzi.length; i++) {
+                        if (!zadanie.odpowiedzi[i].poprawna) {
+                            zadanie.odpowiedzi[i].zaznaczona = false;
+                        }
+                    }
+                };
+
+                $scope.showHideHint = function (index) {
+                    $scope.zadanie.podpowiedzi[index].pokazTresc = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+                    $scope.zadanie.podpowiedzi[index].pokaz = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+
+                    for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
+                        console.log("for z i= " + i);
+                        $scope.zadanie.podpowiedzi[i].pokazTresc = false;
+                        if (i == (index + 1)) {
+                            $scope.zadanie.podpowiedzi[i].pokaz = !$scope.zadanie.podpowiedzi[i].pokaz;
+                        } else {
+                            $scope.zadanie.podpowiedzi[i].pokaz = false;
+                        }
+                    }
+                    if ($scope.zadanie.podpowiedzi.length > 1) {
+                        if (index == 0 && $scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = true;
+                        } else if (index == 0 && !$scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = false;
+                        }
+                        
+                    }
+                };
+            });
+        </script>
+	</body>
+	
+</html>
