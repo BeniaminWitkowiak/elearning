@@ -37,16 +37,16 @@
 	
 	
 	
-	<body ng-app="">
+	<body ng-app="app" ng-controller="task">
 		<div class="grey_background">
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 correct_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;height:100%;">
-				<span style="">POPRAWNA ODPOWIEDŹ</span>
+				<span style="">{{zadanie.wiadomoscPoprawna}}</span>
 				</div>
 			</div>
 			<div class="col-xs-8 col-xs-offset-2 apexnew-book text-center rozmiar36 incorrect_message no-padding" style="border:0px solid red;">
 				<div class="col-xs-12" style="border:0px solid white;">
-				<span style="">BŁĘDNA ODPOWIEDŹ</span>
+				<span style="">{{zadanie.wiadomoscBlad}}</span>
 				</div>
 			</div>
 		</div>
@@ -57,16 +57,21 @@
 				</div>
 			</div>
 			<span class="col-xs-12 no_padding" style="margin-bottom:50px; margin-top:20px;"> 
-				Put the question here Put the question here Put the question here Put the question here Put the question here Put the question here Put the question here Put the question here 
+				{{zadanie.tresc}}
 			</span>
+                <!--Część odpowiedzialna za wyświetlanie podpowiedzi-->
+            <div ng-repeat="podp in zadanie.podpowiedzi" class="radio">
+                <h3 ng-show="podp.pokaz || $first" ng-click="showHideHint($index)">{{podp.info}}</h3> <!--Tuaj wyswietlamy parametr info każdej podpowiedi-->
+				<p ng-show="podp.pokazTresc">{{podp.tresc}}</p>  <!--Tuaj wyswietlamy treść każdej podpowiedi-->
+			</div>
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border:0px solid red; margin-top:80px;">
 				
-				<div class="col-xs-12 col-sm-6">
-					<a href="#"><div class="button false text-center apexnew-medium">False</div></a>
+				<div ng-click="check(false)" class="col-xs-12 col-sm-6">
+					<div class="button false text-center apexnew-medium">False</div>
 				</div>
 				
-				<div class="col-xs-12 col-sm-6 margin-for-xs">
-					<a href="#"><div class="button true text-center apexnew-medium">True</div></a>
+				<div ng-click="check(true)" class="col-xs-12 col-sm-6 margin-for-xs">
+					<div class="button true text-center apexnew-medium">True</div>
 				</div>
 			</div>
 			<div class="col-xs-12 black_font apexnew-light rozmiar14 text-left" style="margin-top:15px; padding-left:24px">
@@ -74,7 +79,69 @@
 			</div>
 		</div>
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-		<script src='js/bootstrap.min.js'></script>	
+		<script src='js/bootstrap.min.js'></script>
+                <script>
+            //skrypt dla zadan z jedna poprawna odpowiedzia
+            var app = angular.module('app', []);
+            app.controller('task', function ($scope, $sce) {
+                //Tutaj podajemy tresc zadania:
+                $scope.zadanie = {
+                    pooprawnaOdpowiedz:true,
+                    tresc: "Równanie $x^2 - 2x + 4 = 0$ ma 3 pierwiastki",
+                    wiadomoscPoprawna: "Zaznaczyles dobra odpowiedz, brawo 1", // wiadomosc ktora wyswieli sie jesli znaznaczono dobra odpowiedz
+                    wiadomoscBlad: "Zaznaczyles zla odpowiedz 1", // wiadomosc ktora wyswieli sie jesli znaznaczono zla odpowiedz
+                    podpowiedzi: [
+                        {
+                            info: "Podpowiedz 1", // napis, na ktory klikamy aby wyswietlic podpowieedz
+                            tresc: '$$f\\colon\\mathbb{R}\\to[0,+\\infty)$, $g\\colon[0,+\\infty)\\to\\mathbb{R}$$', // tresc podpowiedzi, resztę tylko przepisujemy, nic nie trzeba zmieniać
+                            pokaz: true, // tylko w pierwszej podpowiedzi ustawiamy aby była widoczna, bez tego nie mamy gdzie kliknąć aby wyświetlić pierwszą podpowiedź.
+                            pokazTresc: false
+                        }
+                    ]
+                }
+                $scope.check = function (x) {
+                    var correct = (x && $scope.zadanie.pooprawnaOdpowiedz) || (!x && !$scope.zadanie.pooprawnaOdpowiedz);
+                    //wyswietlanie powiadomienia
+                    if (correct) {
+                        $('.grey_background').css("display", "block");
+                        $('.correct_message').css("display", "block");
+                        $scope.task_opt = false;
+                    } else {
+                        $('.grey_background').css("display", "block");
+                        $('.incorrect_message').css("display", "block");
+                    }
+                    //czyszczenie
+                    for (i = 0; i < zadanie.odpowiedzi.length; i++) {
+                        if (!zadanie.odpowiedzi[i].poprawna) {
+                            zadanie.odpowiedzi[i].zaznaczona = false;
+                        }
+                    }
+                };
+
+                $scope.showHideHint = function (index) {
+                    $scope.zadanie.podpowiedzi[index].pokazTresc = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+                    $scope.zadanie.podpowiedzi[index].pokaz = !$scope.zadanie.podpowiedzi[index].pokazTresc;
+
+                    for (i = index + 1; i < $scope.zadanie.podpowiedzi.length; i++) {
+                        console.log("for z i= " + i);
+                        $scope.zadanie.podpowiedzi[i].pokazTresc = false;
+                        if (i == (index + 1)) {
+                            $scope.zadanie.podpowiedzi[i].pokaz = !$scope.zadanie.podpowiedzi[i].pokaz;
+                        } else {
+                            $scope.zadanie.podpowiedzi[i].pokaz = false;
+                        }
+                    }
+                    if ($scope.zadanie.podpowiedzi.length > 1) {
+                        if (index == 0 && $scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = true;
+                        } else if (index == 0 && !$scope.zadanie.podpowiedzi[index].pokazTresc) {
+                            $scope.zadanie.podpowiedzi[index + 1].pokaz = false;
+                        }
+                        
+                    }
+                };
+            });
+        </script>
 	</body>
 	
 </html>

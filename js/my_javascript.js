@@ -43,16 +43,7 @@ $(document).ready(function () {
 	function () {
 		alert('correct');
 	});
-		
-	$('body').on('click', '.true', function () {
-		$('.grey_background').css("display", "block");
-		$('.incorrect_message').css("display", "block");
-	});
-	$('body').on('click', '.false', function () {
-		$('.grey_background').css("display", "block");
-		$('.correct_message').css("display", "block");
-	});
-	
+
 	//po odkliknięciu w tło resetuje wszystkie elementy
 	$('body').on('click', '.grey_background', function () {
 		$(this).slideUp();
